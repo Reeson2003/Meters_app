@@ -6,9 +6,41 @@ import {
     TouchableOpacity,
     Text
 } from 'react-native'
+import parse from '../services/meters_parser';
+import request from '../services/meters_request';
 
+const initialState = {
+    login: '',
+    password: ''
+};
 
 export default class LoginForm extends Component<{}> {
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+    }
+    loginPress = ()=>{
+        request(this.state.login, this.state.password).then(
+            function (success) {
+                const result = parse(success);
+                console.warn(result);
+            },
+            function (error) {
+                console.warn(error);
+            })
+    };
+    loginChanged = (text)=>{
+        this.setState({
+            ...this.state,
+            login: text
+        })
+    };
+    passwordChanged = (text)=>{
+        this.setState({
+            ...this.state,
+            password: text
+        })
+    };
     render() {
         return (
             <View style={styles.container}>
@@ -17,15 +49,20 @@ export default class LoginForm extends Component<{}> {
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
                         placeholder={'username'}
+                        onChangeText={this.loginChanged}
                     />
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
                         placeholder={'password'}
                         secureTextEntry={true}
+                        onChangeText={this.passwordChanged}
                     />
                 </View>
-                <TouchableOpacity style={styles.buttonContainer}>
+                <TouchableOpacity
+                    style={styles.buttonContainer}
+                    onPress={this.loginPress}
+                >
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>
