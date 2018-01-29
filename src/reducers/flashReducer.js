@@ -1,11 +1,13 @@
-import FlashActions from '../actions/flashActions'
+import FlashActions from './flashActions'
 
-const FlashReducer = (state, action) => {
+export default (state, action) => {
     switch (action.type) {
         case FlashActions.TOGGLE_FLASH:
             return {
                 ...state,
                 isFlashOn:!state.isFlashOn
-            }
+            };
+        default:
+            return state;
     }
 };
