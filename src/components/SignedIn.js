@@ -6,31 +6,39 @@ import {
     Text
 } from 'react-native';
 
-const LoggedIn = (onSignOut, info, signOutBtnText)=>{
+const LoggedIn = (props) => (
     <View style={styles.container}>
-        <Text style={styles.info}>{info}</Text>
+        <Text style={styles.info}>{props.info}</Text>
         <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={onSignOut}
+            onPress={props.onSignOut}
         >
-            <Text style={styles.buttonText}>{signOutBtnText}</Text>
+            <Text style={styles.buttonText}>{props.signOutBtnText}</Text>
         </TouchableOpacity>
     </View>
-};
+);
 
 export default LoggedIn;
 
 const styles = StyleSheet.create({
-    container:{
-
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    info:{
-
+    info: {
+        fontSize: 25,
+        color: 'rgba(255,255,255,0.5)',
+        padding: 20
     },
-    buttonContainer:{
-
+    buttonContainer: {
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        marginBottom: 20,
+        marginLeft: 10
     },
-    buttonText:{
-
+    buttonText: {
+        textAlign: 'center',
+        color: 'rgba(0,0,0,0.5)',
+        fontSize: 20,
+        padding: 20
     }
 });

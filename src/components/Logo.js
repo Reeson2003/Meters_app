@@ -43,20 +43,20 @@ export default class Logo extends Component {
 const flashOffImg = require('../images/measureOff.png');
 const flashOnImg = require('../images/measureOn.png');
 
-const Logo = ({onClick, title, isFlashOn}) => {
+const Logo = (props) => (
     <View style={styles.logoContainer}>
         <TouchableOpacity
             style={styles.imageWrapper}
-            onPress={onClick}
+            onPress={props.onClick}
         >
             <Image
                 style={styles.logo}
-                source={isFlashOn ? flashOnImg : flashOffImg}
+                source={props.isFlashOn ? flashOnImg : flashOffImg}
             />
         </TouchableOpacity>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{props.title}</Text>
     </View>
-};
+);
 
 export default Logo;
 

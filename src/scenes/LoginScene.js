@@ -7,28 +7,61 @@ import LoginForm from '../components/LoginForm';
 import Logo from '../components/Logo';
 import SignedIn from '../components/SignedIn'
 
+const initialStore = {
+    isOn: false,
+    isLoggedIn: false,
+    username: '',
+    password: ''
+};
+
 export default class LoginScene extends Component {
+    constructor(props) {
+        super(props);
+        this.state = initialStore;
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
                     <Logo
-                        onClick={()=>{}}
+                        onClick={() => {
+                            this.setState({
+                                ...this.state,
+                                isOn: !this.state.isOn
+                            })
+                        }}
+                        title={'Meters app'}
+                        isFlashOn={this.state.isOn}
                     />
                 </View>
                 <View style={styles.formContainer}>
-                    {store.isLoggedIn
+                    {this.state.isLoggedIn
                         ?
-                        <LoginForm
-                        onSubmit={(username, password)=>{}}
-                        usrPlaceholder={"username"}
-                        passPlaceholder={"password"}
-                        loginBtnText={"Login"}
-                    />
+                        <SignedIn
+                            onSignOut={() => {
+                                this.setState({
+                                    ...this.state,
+                                    isLoggedIn: false
+                                })
+                            }}
+                            info={this.state.username}
+                            signOutBtnText={'Sign out'}
+                        />
                         :
-                    <SignedIn
-
-                    />}
+                        <LoginForm
+                            onSubmit={(username, password) => {
+                                this.setState({
+                                    ...this.state,
+                                    isLoggedIn: true,
+                                    username: username,
+                                    password: password
+                                })
+                            }}
+                            usrPlaceholder={"username"}
+                            passPlaceholder={"password"}
+                            loginBtnText={"Login"}
+                        />}
                 </View>
             </View>
         );
@@ -38,7 +71,7 @@ export default class LoginScene extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#303952',
+        backgroundColor: '#58B19F',
     },
     logoContainer: {
         flex: 1

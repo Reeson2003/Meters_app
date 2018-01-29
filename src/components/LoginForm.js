@@ -7,17 +7,21 @@ import {
     Text
 } from 'react-native'
 
-/*export default class LoginForm extends Component<{}> {
+export default class LoginForm extends Component<{}> {
+    state = {
+        username: '',
+        password: ''
+    };
     loginPress = () => {
-        /!*request(this.state.login, this.state.password).then(
+        /*request(this.state.login, this.state.password).then(
             function (success) {
                 const result = parse(success);
                 console.warn(result);
             },
             function (error) {
                 console.warn(error);
-            })*!/
-        this.props.login(this.username, this.password);
+            })*/
+        this.props.onSubmit(this.state.username, this.state.password);
     };
 
     render() {
@@ -27,39 +31,36 @@ import {
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
-                        placeholder={'username'}
-                        ref={node => {
-                            this.username = node
-                        }}
+                        placeholder={this.props.usrPlaceholder}
+                        value={this.state.username}
+                        onChangeText={username => this.setState({username})}
                     />
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
-                        placeholder={'password'}
-                        secureTextEntry={true}
-                        ref={node => {
-                            this.password = node
-                        }}
+                        placeholder={this.props.passPlaceholder}
+                        value={this.state.password}
+                        onChangeText={password => this.setState({password})}
                     />
                 </View>
                 <TouchableOpacity
                     style={styles.buttonContainer}
                     onPress={this.loginPress}
                 >
-                    <Text style={styles.buttonText}>Login</Text>
+                    <Text style={styles.buttonText}>{this.props.loginBtnText}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
-}*/
+}
 
-const LoginForm =({onSubmit, usrPlaceholder, passPlaceholder, loginBtnText})=>{
+/*const LoginForm = (props) => (
     <View style={styles.container}>
         <View style={styles.inputsWrapper}>
             <TextInput
                 style={styles.input}
                 underlineColorAndroid={'rgba(0,0,0,0)'}
-                placeholder={usrPlaceholder}
+                placeholder={props.usrPlaceholder}
                 ref={node => {
                     this.username = node
                 }}
@@ -67,7 +68,7 @@ const LoginForm =({onSubmit, usrPlaceholder, passPlaceholder, loginBtnText})=>{
             <TextInput
                 style={styles.input}
                 underlineColorAndroid={'rgba(0,0,0,0)'}
-                placeholder={passPlaceholder}
+                placeholder={props.passPlaceholder}
                 secureTextEntry={true}
                 ref={node => {
                     this.password = node
@@ -76,14 +77,16 @@ const LoginForm =({onSubmit, usrPlaceholder, passPlaceholder, loginBtnText})=>{
         </View>
         <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={()=>{onSubmit(this.username, this.password)}}
+            onPress={() => {
+                props.onSubmit(this.username._lastNativeText, this.password._lastNativeText);
+            }}
         >
-            <Text style={styles.buttonText}>{loginBtnText}</Text>
+            <Text style={styles.buttonText}>{props.loginBtnText}</Text>
         </TouchableOpacity>
     </View>
-};
+);
 
-export default LoginForm;
+export default LoginForm;*/
 
 const styles = StyleSheet.create({
     container: {
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#778beb',
+        backgroundColor: 'rgba(255,255,255,0.2)',
         marginBottom: 20,
         marginLeft: 10
     },

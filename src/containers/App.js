@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
-import {
-    View
-} from 'react-native';
-import Splash from './Splash'
-import Login from './Login'
+import LoginScene from '../scenes/LoginScene';
 
 
 export default class App extends Component<{}> {
     render() {
         return (
-            <Login/>
+            <LoginScene/>
         )
     }
 }
