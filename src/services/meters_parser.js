@@ -1,6 +1,6 @@
 import {DOMParser} from 'react-native-html-parser';
 
-export default function parseJquery(html) {
+export default function parse(html) {
     const parser = new DOMParser({
         errorHandler: {
             warning: () => {},

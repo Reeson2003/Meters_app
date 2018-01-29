@@ -6,41 +6,20 @@ import {
     TouchableOpacity,
     Text
 } from 'react-native'
-import parse from '../services/meters_parser';
-import request from '../services/meters_request';
 
-const initialState = {
-    login: '',
-    password: ''
-};
-
-export default class LoginForm extends Component<{}> {
-    constructor(props) {
-        super(props);
-        this.state = initialState;
-    }
-    loginPress = ()=>{
-        request(this.state.login, this.state.password).then(
+/*export default class LoginForm extends Component<{}> {
+    loginPress = () => {
+        /!*request(this.state.login, this.state.password).then(
             function (success) {
                 const result = parse(success);
                 console.warn(result);
             },
             function (error) {
                 console.warn(error);
-            })
+            })*!/
+        this.props.login(this.username, this.password);
     };
-    loginChanged = (text)=>{
-        this.setState({
-            ...this.state,
-            login: text
-        })
-    };
-    passwordChanged = (text)=>{
-        this.setState({
-            ...this.state,
-            password: text
-        })
-    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -49,14 +28,18 @@ export default class LoginForm extends Component<{}> {
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
                         placeholder={'username'}
-                        onChangeText={this.loginChanged}
+                        ref={node => {
+                            this.username = node
+                        }}
                     />
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
                         placeholder={'password'}
                         secureTextEntry={true}
-                        onChangeText={this.passwordChanged}
+                        ref={node => {
+                            this.password = node
+                        }}
                     />
                 </View>
                 <TouchableOpacity
@@ -68,14 +51,46 @@ export default class LoginForm extends Component<{}> {
             </View>
         )
     }
-}
+}*/
+
+const LoginForm =({onSubmit, usrPlaceholder, passPlaceholder, loginBtnText})=>{
+    <View style={styles.container}>
+        <View style={styles.inputsWrapper}>
+            <TextInput
+                style={styles.input}
+                underlineColorAndroid={'rgba(0,0,0,0)'}
+                placeholder={usrPlaceholder}
+                ref={node => {
+                    this.username = node
+                }}
+            />
+            <TextInput
+                style={styles.input}
+                underlineColorAndroid={'rgba(0,0,0,0)'}
+                placeholder={passPlaceholder}
+                secureTextEntry={true}
+                ref={node => {
+                    this.password = node
+                }}
+            />
+        </View>
+        <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={()=>{onSubmit(this.username, this.password)}}
+        >
+            <Text style={styles.buttonText}>{loginBtnText}</Text>
+        </TouchableOpacity>
+    </View>
+};
+
+export default LoginForm;
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection:'row',
+        flexDirection: 'row',
         padding: 20
     },
-    inputsWrapper:{
+    inputsWrapper: {
         flex: 3,
     },
     input: {
@@ -86,17 +101,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         fontSize: 15
     },
-    buttonContainer:{
+    buttonContainer: {
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#778beb',
         marginBottom: 20,
-        marginLeft:10
+        marginLeft: 10
     },
     buttonText: {
-        textAlign:'center',
-        color:'rgba(0,0,0,0.5)',
+        textAlign: 'center',
+        color: 'rgba(0,0,0,0.5)',
         fontSize: 20
     }
 });

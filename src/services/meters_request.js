@@ -1,6 +1,4 @@
 const URL = "https://izora.info/personal/meters/?login=yes";
-const PASSWORD = "345518011";
-const LOGIN = "arbuzo5428193";
 
 export default function fetchData(login, password) {
     const form = new FormData();

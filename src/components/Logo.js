@@ -6,42 +6,59 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native'
-import Torch from 'react-native-torch';
+/* import Torch from 'react-native-torch';
 
-const initialState = {
-    isTorchOn: false
-};
 
 export default class Logo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initialState;
-    }
-    switchTorch = () => {
-        const isOn = !this.state.isTorchOn;
+    toggleFlash = () => {
+        /!*const isOn = !this.state.isTorchOn;
         const props = this;
         Torch.switchState(isOn).then(function () {
             props.setState({isTorchOn: isOn});
-        });
+        });*!/
+        this.props.toggleFlash();
     };
+    flashOffImg = require('../images/measureOff.png');
+    flashOnImg = require('../images/measureOn.png');
 
     render() {
+        const image = this.props.isFlashOn ? this.flashOnImg : this.flashOffImg;
         return (
             <View style={styles.logoContainer}>
                 <TouchableOpacity
                     style={styles.imageWrapper}
-                    onPress={this.switchTorch}
+                    onPress={this.toggleFlash}
                 >
                     <Image
                         style={styles.logo}
-                        source={require('../images/measure.png')}
+                        source={image}
                     />
                 </TouchableOpacity>
                 <Text style={styles.title}>Meters app</Text>
             </View>
         );
     }
-}
+}*/
+
+const flashOffImg = require('../images/measureOff.png');
+const flashOnImg = require('../images/measureOn.png');
+
+const Logo = ({onClick, title, isFlashOn}) => {
+    <View style={styles.logoContainer}>
+        <TouchableOpacity
+            style={styles.imageWrapper}
+            onPress={onClick}
+        >
+            <Image
+                style={styles.logo}
+                source={isFlashOn ? flashOnImg : flashOffImg}
+            />
+        </TouchableOpacity>
+        <Text style={styles.title}>{title}</Text>
+    </View>
+};
+
+export default Logo;
 
 const styles = StyleSheet.create({
     logoContainer: {
