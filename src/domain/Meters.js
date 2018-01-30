@@ -1,34 +1,37 @@
+import Loader from './Loader';
+import Parser from './Parser';
+
 export default class Meters {
+    data;
     login;
     password;
 
     constructor(login, password) {
         this.login = login;
         this.password = password;
+        return this.initData(login, password);
     };
 
-    signIn = () => {
+    initData = (login, password) => {
         return new Promise((resolve, reject) => {
-
+            const loader = new Loader();
+            loader.downLoad(login, password)
+                .then((html) => {
+                    try {
+                        this.data = new Parser(html).toJson();
+                        resolve(this);
+                    } catch (e) {
+                        reject(e);
+                    }
+                })
+                .catch(e => {
+                    reject(e);
+                });
         });
     };
 
     signOut = () => {
-        return new Promise((resolve, reject) => {
-
-        });
-    };
-
-    getMeters = () => {
-        return new Promise((resolve, reject) => {
-
-        });
-    };
-
-    getUserName = () => {
-        return new Promise((resolve, reject) => {
-
-        });
+        return new Loader().logOut();
     };
 
     setMeters = (gas, water, eDay, eNight) => {

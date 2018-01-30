@@ -1,5 +1,10 @@
 import {DOMParser} from 'react-native-html-parser';
 
+export const Errors = {
+    LOGIN_ERROR: 'Incorrect username or password',
+    PARSE_ERROR: 'Can not parse data'
+};
+
 export default class Parser {
     _username;
     _gasNow;
@@ -26,9 +31,19 @@ export default class Parser {
                 }
             }
         });
-        const doc = parser.parseFromString(html, "text/html");
-        this.parseUsername(doc);
-        this.parseMeters(doc);
+        const document = parser.parseFromString(html, "text/html");
+        if (this.isNotLoggedIn(document))
+            throw Errors.LOGIN_ERROR;
+        try {
+            this.parseUsername(document);
+            this.parseMeters(document);
+        } catch (e) {
+            throw Errors.PARSE_ERROR;
+        }
+    };
+
+    isNotLoggedIn = (document) => {
+        return document.querySelect('.errortext')[0];
     };
 
     parseUsername = (document) => {

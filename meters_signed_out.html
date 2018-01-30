@@ -1,0 +1,240 @@
+"C:\Program Files\JetBrains\WebStorm 2017.2.5 Educate\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" -r babel-register C:\my_workspace\frontend\Meters_app\src\test\LoaderTest.js
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-RU">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <meta name="keywords" content="Управляющая компания Новая Ижора" />
+    <meta name="description" content="Сайт для УК" />
+    <link href="/bitrix/components/bitrix/system.show_message/templates/.default/style.css?1275291599" type="text/css" rel="stylesheet" />
+    <link href="/bitrix/templates/tszh/styles.css?1277988274" type="text/css" rel="stylesheet" />
+    <link href="/bitrix/templates/tszh/template_styles.css?1291796617" type="text/css" rel="stylesheet" />
+
+    <title>Авторизация &ndash; Управляющая компания ООО "Новая Ижора"</title>
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/bitrix/templates/tszh/styles_ie.css" type="text/css" />
+    <![endif]-->
+    <script type="text/javascript" src="/bitrix/templates/tszh/script.js"></script>
+
+    <link rel="stylesheet" href="/bitrix/templates/tszh/squeezebox/assets/squeezebox.css" type="text/css" />
+    <script type="text/javascript" src="/bitrix/templates/tszh/squeezebox/mootools-1.2.5-core.js"></script> <!-- For SqueezeBox -->
+    <script type="text/javascript" src="/bitrix/templates/tszh/squeezebox/squeezebox_1_1rc4_blt_edition.js"></script>
+    <script type="text/javascript">
+        function OnLoad() {
+            SqueezeBox.initialize();
+            CheckEmailChange();
+            CheckScore();
+        }
+        function CheckEmailChange() {
+            onetimeAlertActive = false; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            emailMustBeChanged = false; // Значение переменной задаётся при генерации страницы на сервере.
+            if (onetimeAlertActive && emailMustBeChanged) {
+                alert ("Напоминаем, что Вам необходимо сменить e-mail адрес в вашем профиле!\nПосле смены адреса e-mail необходимо произвести повторную авторизацию!");
+            }
+        }
+        function CheckScore() {
+            onetimeAlertActive = false; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            dolgExist = false; // Значение переменной задаётся при генерации страницы на сервере.
+            if (onetimeAlertActive && dolgExist) {
+                var url="/dolg.html?rub=0&kop=0"; // Значения переменных задаются при генерации страницы на сервере.
+                SqueezeBox.fromElement(url,{handler:"iframe",size:{x:650,y:450}});
+            }
+        }
+    </script>
+
+</head>
+<body OnLoad="OnLoad()">
+<div id="page-wrapper">
+
+    <div class="page-inner">
+        <div id="header"><div class="page-width">
+            <h1 id="page-title"><a href="/"> <em>Управляющая компания ООО "Новая Ижора"</em></a></h1>	<div id="logged-as">
+            <a href="/auth/">Авторизация</a>
+            &nbsp;
+            <!--a href="/auth/?register=yes">Регистрация</a -->
+            <a href="/aboutregistration/">Как зарегистроваться</a -->
+        </div>
+            <form id="search-form" action="/search/" method="get"><label for="search-form-q" onclick="this.nextSibling.focus()" id="lbl">Поиск по сайту</label><input type="text" name="q" value="" id="search-form-q" onfocus="clean(this)"/>
+                <button type="submit">&raquo;</button>
+            </form>
+        </div></div>
+        <div id="top-links"><div class="page-width">
+            <div id="header-date-now"></div>
+            <script src="/bitrix/templates/tszh/components/bitrix/menu/top_multilevel/script.js?1265453032" type="text/javascript"></script><ul id="top-multilevel-menu">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/project/">О проекте</a></li>
+            <li><a href="/news/">Новости</a></li>
+            <li><a href="/docs/">Документы</a></li>
+            <li class="selected"><a href="/personal/">Личный кабинет</a></li>
+            <li><a href="/contacts/">Контакты</a></li>
+            <li class="last"><a href="/reports/">Отчетность</a></li>
+        </ul>
+        </div></div>
+
+        <div id="content"><div class="page-width">
+            <div id="left"><div class="column-in">
+                <h2><em>Личный</em> кабинет</h2>
+                <!--p>
+                Добро пожаловать.
+                </p-->
+                <table class="list">
+
+                    <tr>
+                        <td class="n">1</td>
+                        <td><a href="/">На главную</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">2</td>
+                        <td><a href="/personal/index.php">Общая информация</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">3</td>
+                        <td><a href="/personal/announcements/">Объявления</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">4</td>
+                        <td><a href="/personal/circulating-sheet/">Оборотная ведомость</a></td>
+                    </tr>
+
+                    <tr class="active">
+                        <td class="n">5</td>
+                        <td><a href="/personal/meters/">Данные счетчиков</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">6</td>
+                        <td><a href="/personal/receipt/">Квитанции</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">7</td>
+                        <td><a href="/personal/support/">Заявки в диспетчерскую службу</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">8</td>
+                        <td><a href="/personal/petition/">Мои обращения</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">9</td>
+                        <td><a href="/personal/questions-and-answers/">Вопрос - ответ</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">10</td>
+                        <td><a href="/personal/profile/">Мой профиль</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">11</td>
+                        <td><a href="/personal/services/subscribe.php">Мои подписки</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">12</td>
+                        <td><a href="/auth/?logout=yes">Выход</a></td>
+                    </tr>
+                </table>
+
+            </div></div>
+
+
+            <style type="text/css">
+
+                #content #right {display: none;}
+
+                #content #middle { margin: 0 0 0 20%; }
+
+            </style>
+
+
+            <div id="middle"><div class="column-in">
+                <h2>Авторизация</h2>
+
+                <p><font class="errortext">Неверный логин или пароль.<br /></font></p><form method="post" action="/personal/meters/?login=yes" id="auth-form">
+                <input type="hidden" name="AUTH_FORM" value="Y" />
+                <input type="hidden" name="TYPE" value="AUTH" />
+                <input type="hidden" name="backurl" value="/personal/meters/" />	<fieldset>
+                <label for="auth-login">Логин:</label>
+                <input type="text" name="USER_LOGIN" class="login input" id="auth-login" value="" />
+            </fieldset>
+                <fieldset>
+                    <label for="auth-password">Пароль:</label>
+                    <input type="password" name="USER_PASSWORD" class="password input" id="auth-password" value="" />
+                </fieldset>
+                <p><input type="checkbox" name="USER_REMEMBER" class="remember checkbox" id="auth-remember" value="Y"/> <label for="auth-remember" class="remember">Запомнить меня</label></p>
+
+                <button type="submit" title="Войти">Войти</button>
+
+                <p class="links">
+
+                    <a href="/personal/meters/?forgot_password=yes">Восстановление пароля</a><br />
+                    (после получения контрольной строки следуйте на <a href="/personal/meters/?change_password=yes">форму для смены пароля</a>)
+
+                </p>
+            </form>
+                <script type="text/javascript">
+                    var fldLogin = document.getElementById('auth-login');
+                    if (fldLogin) {
+                        fldLogin.focus();
+                        fldLogin.select();
+                    }
+                </script>	</div></div>
+            <div class="cleaner">&nbsp;</div>
+
+            <div id="footer"><div class="page-width"><div class="i">
+                <p class="copyright">
+
+                    <div>
+                        <div>
+                            <a href="http://www.baltrosgroup.ru" target="_blank" >
+                                <img align="left" alt="Группа компаний Балтрос" src="/bitrix/templates/tszh/images/baltros_mini.gif" complete="complete" />
+                            </a>
+                        </div>
+                        <div>
+                            <br />
+                            <br />
+                <p style="text-indent: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&copy; Copyright 2010</p>
+                <p style="text-indent: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;Разработка: <a href="http://www.baltrosgroup.ru/" target="_blank" >ГК &laquo;Балтрос&raquo;</a></p>
+                <p style="text-indent: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;При использовании материалов сайта ссылка на сайт обязательна</p>
+            </div>
+            </div>
+
+                <div style="float:right; position:relative; top:-32px; left:-25px">
+                    <!-- HotLog -->
+                    <span id="hotlog_counter"></span>
+                    <span id="hotlog_dyn"></span>
+                    <script type="text/javascript">
+                        var hot_s = document.createElement('script');
+                        hot_s.type = 'text/javascript'; hot_s.async = true;
+                        hot_s.src = 'https://js.hotlog.ru/dcounter/2553064.js';
+                        hot_d = document.getElementById('hotlog_dyn');
+                        hot_d.appendChild(hot_s);
+                    </script>
+                    <noscript>
+                        <a href="https://click.hotlog.ru/?2553064" target="_blank"><img
+                                src="https://hit20.hotlog.ru/cgi-bin/hotlog/count?s=2553064&amp;im=307" border="0"
+                                alt="HotLog"></a>
+                    </noscript>
+                    <!-- /HotLog -->
+                </div>	<div class="links">
+
+                </div>
+            </div></div></div>
+    </div>
+</div>
+<div>&nbsp;</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-10874237-1");
+        pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
