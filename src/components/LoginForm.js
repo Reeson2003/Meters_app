@@ -13,14 +13,6 @@ export default class LoginForm extends Component<{}> {
         password: ''
     };
     loginPress = () => {
-        /*request(this.state.login, this.state.password).then(
-            function (success) {
-                const result = parse(success);
-                console.warn(result);
-            },
-            function (error) {
-                console.warn(error);
-            })*/
         this.props.onSubmit(this.state.username, this.state.password);
     };
 
@@ -32,6 +24,10 @@ export default class LoginForm extends Component<{}> {
                         style={styles.input}
                         underlineColorAndroid={'rgba(0,0,0,0)'}
                         placeholder={this.props.usrPlaceholder}
+                        autoCapitalize={'none'}
+                        autoCorrect={false}
+                        returnKeyType={'next'}
+                        onSubmitEditing={()=>{this.passwordInput.focus()}}
                         value={this.state.username}
                         onChangeText={username => this.setState({username})}
                     />
@@ -41,6 +37,9 @@ export default class LoginForm extends Component<{}> {
                         placeholder={this.props.passPlaceholder}
                         value={this.state.password}
                         onChangeText={password => this.setState({password})}
+                        ref={(el)=>{this.passwordInput = el}}
+                        returnKeyType={'go'}
+                        onSubmitEditing={this.loginPress}
                     />
                 </View>
                 <TouchableOpacity
@@ -53,40 +52,6 @@ export default class LoginForm extends Component<{}> {
         )
     }
 }
-
-/*const LoginForm = (props) => (
-    <View style={styles.container}>
-        <View style={styles.inputsWrapper}>
-            <TextInput
-                style={styles.input}
-                underlineColorAndroid={'rgba(0,0,0,0)'}
-                placeholder={props.usrPlaceholder}
-                ref={node => {
-                    this.username = node
-                }}
-            />
-            <TextInput
-                style={styles.input}
-                underlineColorAndroid={'rgba(0,0,0,0)'}
-                placeholder={props.passPlaceholder}
-                secureTextEntry={true}
-                ref={node => {
-                    this.password = node
-                }}
-            />
-        </View>
-        <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => {
-                props.onSubmit(this.username._lastNativeText, this.password._lastNativeText);
-            }}
-        >
-            <Text style={styles.buttonText}>{props.loginBtnText}</Text>
-        </TouchableOpacity>
-    </View>
-);
-
-export default LoginForm;*/
 
 const styles = StyleSheet.create({
     container: {

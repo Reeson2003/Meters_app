@@ -71,10 +71,12 @@ export default class LoginScene extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#58B19F',
+        backgroundColor: '#131539',
     },
     logoContainer: {
+        flex: 2
+    },
+    formContainer: {
         flex: 1
     },
-    formContainer: {},
 });
