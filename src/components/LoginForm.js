@@ -56,29 +56,33 @@ export default class LoginForm extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        padding: 20
+        justifyContent: 'center',
+        padding: 10
     },
     inputsWrapper: {
         flex: 3,
+        justifyContent: 'space-between'
     },
     input: {
         backgroundColor: 'rgba(255,255,255,0.5)',
-        marginBottom: 20,
+        margin: 10,
         height: 40,
         color: 'rgba(0,0,0,0.5)',
         paddingHorizontal: 20,
-        fontSize: 15
+        fontSize: 15,
+        borderRadius: 2
     },
     buttonContainer: {
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(255,255,255,0.2)',
-        marginBottom: 20,
-        marginLeft: 10
+        borderRadius: 2,
+        margin: 10
     },
     buttonText: {
         textAlign: 'center',
+        textAlignVertical: 'center',
         color: 'rgba(0,0,0,0.5)',
         fontSize: 20
     }

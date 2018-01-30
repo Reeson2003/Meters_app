@@ -1,5 +1,5 @@
-import FormData from 'form-data';
-import fetch from 'node-fetch';
+// import FormData from 'form-data';
+// import fetch from 'node-fetch';
 
 const METERS_URL = "https://izora.info/personal/meters/?login=yes";
 const LOGOUT_URL = 'https://izora.info/auth/?logout=yes';

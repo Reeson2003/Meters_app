@@ -1,1 +1,14 @@
 -r babel-register
+
+Torch:
+npm install --save react-native-torch
+react-native link react-native-torch
+
+Run on device:
+adb reverse tcp:8081 tcp:8081
+
+Fix:
+npm start -- --reset-cache
+
+cd android
+gradlew clean

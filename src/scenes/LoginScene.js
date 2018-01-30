@@ -5,19 +5,24 @@ import {
 } from 'react-native';
 import LoginForm from '../components/LoginForm';
 import Logo from '../components/Logo';
-import SignedIn from '../components/SignedIn'
+import SignedIn from '../components/SignedIn';
+import Flash from '../domain/Flash';
+import Meters from '../domain/Meters';
 
-const initialStore = {
+const initialState = {
     isOn: false,
     isLoggedIn: false,
     username: '',
-    password: ''
+    password: '',
+    meters: {}
 };
 
 export default class LoginScene extends Component {
+    meters;
+
     constructor(props) {
         super(props);
-        this.state = initialStore;
+        this.state = initialState;
     }
 
     render() {
@@ -26,10 +31,14 @@ export default class LoginScene extends Component {
                 <View style={styles.logoContainer}>
                     <Logo
                         onClick={() => {
-                            this.setState({
-                                ...this.state,
-                                isOn: !this.state.isOn
-                            })
+                            const on = !this.state.isOn;
+                            new Flash().toggle(on)
+                                .then(() => {
+                                    this.setState({
+                                        ...this.state,
+                                        isOn: on
+                                    });
+                                });
                         }}
                         title={'Meters app'}
                         isFlashOn={this.state.isOn}
@@ -40,10 +49,18 @@ export default class LoginScene extends Component {
                         ?
                         <SignedIn
                             onSignOut={() => {
-                                this.setState({
-                                    ...this.state,
-                                    isLoggedIn: false
-                                })
+                                if (this.meters) {
+                                    this.meters.signOut()
+                                        .then(() => {
+                                            this.setState({
+                                                ...this.state,
+                                                isLoggedIn: false
+                                            })
+                                        })
+                                }
+                            }}
+                            onMetersPress={()=>{
+                                console.warn(this.state.meters);
                             }}
                             info={this.state.username}
                             signOutBtnText={'Sign out'}
@@ -51,12 +68,17 @@ export default class LoginScene extends Component {
                         :
                         <LoginForm
                             onSubmit={(username, password) => {
-                                this.setState({
-                                    ...this.state,
-                                    isLoggedIn: true,
-                                    username: username,
-                                    password: password
-                                })
+                                this.meters = new Meters(username, password)
+                                    .then((meters) => {
+                                        this.setState({
+                                            ...this.state,
+                                            isLoggedIn: true,
+                                            username: username,
+                                            password: password,
+                                            meters: meters.data
+                                        });
+                                    })
+
                             }}
                             usrPlaceholder={"username"}
                             passPlaceholder={"password"}
@@ -77,6 +99,8 @@ const styles = StyleSheet.create({
         flex: 2
     },
     formContainer: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 });

@@ -9,12 +9,20 @@ import {
 const LoggedIn = (props) => (
     <View style={styles.container}>
         <Text style={styles.info}>{props.info}</Text>
-        <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={props.onSignOut}
-        >
-            <Text style={styles.buttonText}>{props.signOutBtnText}</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonsWrapper}>
+            <TouchableOpacity
+                style={styles.buttonContainer}
+                onPress={props.onSignOut}
+            >
+                <Text style={styles.buttonText}>{props.signOutBtnText}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.buttonContainer}
+                onPress={props.onMetersPress}
+            >
+                <Text style={styles.buttonText}>Meters</Text>
+            </TouchableOpacity>
+        </View>
     </View>
 );
 
@@ -22,21 +30,32 @@ export default LoggedIn;
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         justifyContent: 'center',
         alignItems: 'center'
     },
     info: {
+        flex:1,
+        textAlign: 'center',
+        textAlignVertical: 'center',
         fontSize: 25,
-        color: 'rgba(255,255,255,0.5)',
-        padding: 20
+        color: 'rgba(255,255,255,0.5)'
+    },
+    buttonsWrapper: {
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
     },
     buttonContainer: {
+        flex:1,
         backgroundColor: 'rgba(255,255,255,0.2)',
-        marginBottom: 20,
-        marginLeft: 10
+        borderRadius: 2,
+        margin: 10
     },
     buttonText: {
         textAlign: 'center',
+        textAlignVertical: 'center',
         color: 'rgba(0,0,0,0.5)',
         fontSize: 20,
         padding: 20
