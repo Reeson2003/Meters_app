@@ -5,7 +5,8 @@ import {
     View,
     Image,
     TouchableOpacity
-} from 'react-native'
+} from 'react-native';
+import {PropTypes} from "react-redux";
 
 const flashOffImg = require('../images/measureOff.png');
 const flashOnImg = require('../images/measureOn.png');
@@ -52,3 +53,9 @@ const styles = StyleSheet.create({
         opacity: 0.5
     }
 });
+
+Logo.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    isFlashOn: PropTypes.boolean.isRequired,
+    title: PropTypes.string.isRequired
+};

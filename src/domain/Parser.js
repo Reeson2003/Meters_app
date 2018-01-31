@@ -128,40 +128,4 @@ export default class Parser {
             }
         }
     };
-
-    get username() {
-        return this._username;
-    }
-
-    get gasNow() {
-        return this._gasNow;
-    }
-
-    get gasPrev() {
-        return this._gasPrev;
-    }
-
-    get waterNow() {
-        return this._waterNow;
-    }
-
-    get waterPrev() {
-        return this._waterPrev;
-    }
-
-    get eDayNow() {
-        return this._eDayNow;
-    }
-
-    get eDayPrev() {
-        return this._eDayPrev;
-    }
-
-    get eNightNow() {
-        return this._eNightNow;
-    }
-
-    get eNightPrev() {
-        return this._eNightPrev;
-    }
 }

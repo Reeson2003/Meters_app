@@ -18,10 +18,9 @@ export default class Loader {
                 method: 'post',
                 body: form
             }).then(function (ok) {
-                ok.text()
-                    .then(function (ok1) {
-                        resolve(ok1);
-                    })
+               return ok.text();
+            }).then(function (ok1) {
+                resolve(ok1);
             }).catch((error) => {
                 reject(error)
             });

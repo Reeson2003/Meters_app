@@ -4,6 +4,10 @@ Torch:
 npm install --save react-native-torch
 react-native link react-native-torch
 
+I18N:
+npm install react-native-i18n --save
+react-native link react-native-i18n
+
 Run on device:
 adb reverse tcp:8081 tcp:8081
 
