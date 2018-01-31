@@ -14,16 +14,13 @@ const initialState = {
     isLoggedIn: false,
     username: '',
     password: '',
-    meters: {}
+    data: {},
+    user: ''
 };
 
 export default class LoginScene extends Component {
     meters;
-
-    constructor(props) {
-        super(props);
-        this.state = initialState;
-    }
+    state = initialState;
 
     render() {
         return (
@@ -55,28 +52,37 @@ export default class LoginScene extends Component {
                                             this.setState({
                                                 ...this.state,
                                                 isLoggedIn: false
-                                            })
+                                            });
+                                            this.meters = null;
+                                        })
+                                        .catch((error)=>{
+                                            console.warn(error);
                                         })
                                 }
                             }}
-                            onMetersPress={()=>{
-                                console.warn(this.state.meters);
+                            onMetersPress={() => {
+                                console.warn(this.state.data);
                             }}
-                            info={this.state.username}
+                            info={this.state.user}
                             signOutBtnText={'Sign out'}
                         />
                         :
                         <LoginForm
                             onSubmit={(username, password) => {
-                                this.meters = new Meters(username, password)
+                                new Meters(username, password)
                                     .then((meters) => {
+                                        this.meters = meters;
                                         this.setState({
                                             ...this.state,
                                             isLoggedIn: true,
                                             username: username,
                                             password: password,
-                                            meters: meters.data
+                                            data: meters.data,
+                                            user: meters.data.username
                                         });
+                                    })
+                                    .catch((error)=>{
+                                        console.warn(error);
                                     })
 
                             }}
@@ -93,7 +99,7 @@ export default class LoginScene extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#131539',
+        backgroundColor: '#0a3d62',
     },
     logoContainer: {
         flex: 2
