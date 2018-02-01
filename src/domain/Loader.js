@@ -1,3 +1,4 @@
+////uncomment to test on node.js
 // import FormData from 'form-data';
 // import fetch from 'node-fetch';
 
