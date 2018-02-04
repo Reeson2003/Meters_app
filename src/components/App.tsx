@@ -12,15 +12,20 @@ export interface Props {
 export default class App extends Component<Props, null> {
     render() {
         return (
-            <View>
-                <Text style={styles.text}>{this.props.text}</Text>
+            <View style={styles.container}>
+                <Text style={styles.text}>hello world</Text>
             </View>
-        )
-    };
-};
+        );
+    }
+}
 
 const styles = StyleSheet.create({
+    container:{
+        backgroundColor: 'green'
+    },
     text: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 25,
+        color: 'black',
     }
-})
+});
