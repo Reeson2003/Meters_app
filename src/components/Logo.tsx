@@ -16,16 +16,12 @@ import {DispatchProps} from '../actions/flashActions'
 const flashOffImg = require('../images/measureOff.png')
 const flashOnImg = require('../images/measureOn.png')
 
-export interface LogoProps {
-    FlashState,
-    DispatchProps
-}
 
 export type OwnProps = {
     title: string
 }
 
-export default class Logo extends Component<LogoProps & OwnProps> {
+export default class Logo extends Component<FlashState & DispatchProps & OwnProps> {
     toggleFlash = () => {
 
     }
@@ -34,18 +30,18 @@ export default class Logo extends Component<LogoProps & OwnProps> {
             <View style={styles.logoContainer}>
                 <TouchableOpacity
                     style={styles.imageWrapper}
-                    onPress={props.onClick}
+                    onPress={}
                 >
                     <Image
                         style={{
                             width: 100,
                             height: 100,
-                            opacity: props.isFlashOn ? 0.6 : 0.1
+                            opacity: this.props.isOn ? 0.6 : 0.1
                         }}
-                        source={props.isFlashOn ? flashOnImg : flashOffImg}
+                        source={this.props.isOn ? flashOnImg : flashOffImg}
                     />
                 </TouchableOpacity>
-                <Text style={styles.title}>{props.title}</Text>
+                <Text style={styles.title}>{this.props.title}</Text>
             </View>
         )
     };
