@@ -1,10 +1,10 @@
-export type FlashStore = {
+export type FlashState = {
     isOn: boolean,
     loading: boolean,
     error: string
 }
 
-export type UserStore = {
+export type UserState = {
     username: string,
     password: string,
     fullName: string,
@@ -17,7 +17,7 @@ export type Meter = {
     previous: number
 }
 
-export type MetersStore = {
+export type MetersState = {
     water: Meter,
     gas: Meter,
     electricity: {
@@ -26,4 +26,10 @@ export type MetersStore = {
     },
     loading: boolean,
     error: string
+}
+
+export type State = {
+    flash: FlashState,
+    user: UserState,
+    meters: MetersState
 }
