@@ -1,6 +1,6 @@
 ////uncomment to test on node.js
-import FormData from 'form-data';
-import fetch from 'node-fetch';
+// import FormData from 'form-data';
+// import fetch from 'node-fetch';
 
 const METERS_URL = "https://izora.info/personal/meters/?login=yes";
 const LOGOUT_URL = 'https://izora.info/auth/?logout=yes';
@@ -19,9 +19,10 @@ export default class Loader {
                 method: 'post',
                 body: form
             }).then(function (ok) {
-               return ok.text();
-            }).then(function (ok1) {
-                resolve(ok1);
+                ok.text()
+                    .then(function (ok1) {
+                        resolve(ok1);
+                    })
             }).catch((error) => {
                 reject(error)
             });
