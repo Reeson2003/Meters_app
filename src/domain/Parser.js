@@ -95,11 +95,16 @@ export default class Parser {
     };
 
     parseData = (raw) => {
-        const text = raw.firstChild.data;
+        const el = raw.firstChild;
+        const text = el.data;
         const data = text.trim().split('/');
+        const prev = data[0];
+        let curr = data[1];
+        if (!curr)
+            curr = raw.querySelect('input')[0].attributes[2].value;
         return {
-            previous: data[0] ? data[0] : 0,
-            current: data[1] ? data[1] : 0
+            previous: prev,
+            current: curr
         };
     };
 
