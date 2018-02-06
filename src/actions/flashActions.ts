@@ -19,13 +19,9 @@ export type ErrorAction = {
 
 export type Actions = TogglehAction | StartLoadingAction | StopLoadingAction | ErrorAction;
 
-const mapStateToProps = (state: State): FlashState => {
-    return state.flash
-}
-
 type Dispatch = (action: Actions) => void;
 
-interface DispatchFromProps {
+export interface DispatchProps {
     onToggle: () => void,
     onStartLoading: () => void,
     onStopLoading: () => void,
@@ -41,13 +37,13 @@ const toggle = (): Actions => {
 const startLoading = (): Actions => {
     return {
         type: 'START_LOADING'
-    };
+    }
 }
 
-const stopLoading = ():Actions => {
+const stopLoading = (): Actions => {
     return {
         type: 'STOP_LOADING'
-    };
+    }
 }
 
 const error = (error: string): Actions => {
@@ -57,11 +53,15 @@ const error = (error: string): Actions => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchFromProps => {
+export const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     return {
         onToggle: () => dispatch(toggle()),
         onStartLoading: () => dispatch(startLoading()),
         onStopLoading: () => dispatch(stopLoading()),
         onError: (err: string) => dispatch(error(err))
     }
+}
+
+export const mapStateToProps = (state: State): FlashState => {
+    return state.flash
 }
