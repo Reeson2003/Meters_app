@@ -1,0 +1,258 @@
+"C:\Program Files\JetBrains\WebStorm 2017.2.5 Educate\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" -r babel-register C:\my_workspace\frontend\Meters_app\src\test\LoaderTest.js
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-RU">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <meta name="keywords" content="Управляющая компания Новая Ижора" />
+    <meta name="description" content="Сайт для УК" />
+    <link href="/bitrix/templates/tszh/styles.css?1277988274" type="text/css" rel="stylesheet" />
+    <link href="/bitrix/templates/tszh/template_styles.css?1291796617" type="text/css" rel="stylesheet" />
+
+    <title>Данные счетчиков &ndash; Управляющая компания ООО "Новая Ижора"</title>
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/bitrix/templates/tszh/styles_ie.css" type="text/css" />
+    <![endif]-->
+    <script type="text/javascript" src="/bitrix/templates/tszh/script.js"></script>
+
+    <link rel="stylesheet" href="/bitrix/templates/tszh/squeezebox/assets/squeezebox.css" type="text/css" />
+    <script type="text/javascript" src="/bitrix/templates/tszh/squeezebox/mootools-1.2.5-core.js"></script> <!-- For SqueezeBox -->
+    <script type="text/javascript" src="/bitrix/templates/tszh/squeezebox/squeezebox_1_1rc4_blt_edition.js"></script>
+    <script type="text/javascript">
+        function OnLoad() {
+            SqueezeBox.initialize();
+            CheckEmailChange();
+            CheckScore();
+        }
+        function CheckEmailChange() {
+            onetimeAlertActive = true; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            emailMustBeChanged = false; // Значение переменной задаётся при генерации страницы на сервере.
+            if (onetimeAlertActive && emailMustBeChanged) {
+                alert ("Напоминаем, что Вам необходимо сменить e-mail адрес в вашем профиле!\nПосле смены адреса e-mail необходимо произвести повторную авторизацию!");
+            }
+        }
+        function CheckScore() {
+            onetimeAlertActive = true; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            dolgExist = false; // Значение переменной задаётся при генерации страницы на сервере.
+            if (onetimeAlertActive && dolgExist) {
+                var url="/dolg.html?rub=0&kop=0"; // Значения переменных задаются при генерации страницы на сервере.
+                SqueezeBox.fromElement(url,{handler:"iframe",size:{x:650,y:450}});
+            }
+        }
+    </script>
+
+</head>
+<body OnLoad="OnLoad()">
+<div id="page-wrapper">
+
+    <div class="page-inner">
+        <div id="header"><div class="page-width">
+            <h1 id="page-title"><a href="/"> <em>Управляющая компания ООО "Новая Ижора"</em></a></h1>	<div id="logged-as">
+            Вы авторизованы: <em>Гаврилова Клавдия Николаевна [arbuzo5428193]</em> <a href="/auth/?logout=yes">Выйти</a>
+        </div>
+            <form id="search-form" action="/search/" method="get"><label for="search-form-q" onclick="this.nextSibling.focus()" id="lbl">Поиск по сайту</label><input type="text" name="q" value="" id="search-form-q" onfocus="clean(this)"/>
+                <button type="submit">&raquo;</button>
+            </form>
+        </div></div>
+        <div id="top-links"><div class="page-width">
+            <div id="header-date-now"></div>
+            <script src="/bitrix/templates/tszh/components/bitrix/menu/top_multilevel/script.js?1265453032" type="text/javascript"></script><ul id="top-multilevel-menu">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/project/">О проекте</a></li>
+            <li><a href="/news/">Новости</a></li>
+            <li><a href="/docs/">Документы</a></li>
+            <li class="selected"><a href="/personal/">Личный кабинет</a></li>
+            <li><a href="/contacts/">Контакты</a></li>
+            <li class="last"><a href="/reports/">Отчетность</a></li>
+        </ul>
+        </div></div>
+
+        <div id="content"><div class="page-width">
+            <div id="left"><div class="column-in">
+                <h2><em>Личный</em> кабинет</h2>
+                <!--p>
+                Добро пожаловать.
+                </p-->
+                <table class="list">
+
+                    <tr>
+                        <td class="n">1</td>
+                        <td><a href="/">На главную</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">2</td>
+                        <td><a href="/personal/index.php">Общая информация</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">3</td>
+                        <td><a href="/personal/announcements/">Объявления</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">4</td>
+                        <td><a href="/personal/circulating-sheet/">Оборотная ведомость</a></td>
+                    </tr>
+
+                    <tr class="active">
+                        <td class="n">5</td>
+                        <td><a href="/personal/meters/">Данные счетчиков</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">6</td>
+                        <td><a href="/personal/receipt/">Квитанции</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">7</td>
+                        <td><a href="/personal/support/">Заявки в диспетчерскую службу</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">8</td>
+                        <td><a href="/personal/petition/">Мои обращения</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">9</td>
+                        <td><a href="/personal/questions-and-answers/">Вопрос - ответ</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">10</td>
+                        <td><a href="/personal/profile/">Мой профиль</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">11</td>
+                        <td><a href="/personal/services/subscribe.php">Мои подписки</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="n">12</td>
+                        <td><a href="/auth/?logout=yes">Выход</a></td>
+                    </tr>
+                </table>
+
+            </div></div>
+
+
+            <style type="text/css">
+
+                #content #right {display: none;}
+
+                #content #middle { margin: 0 0 0 20%; }
+
+            </style>
+
+
+            <div id="middle"><div class="column-in">
+
+                <h2><em>Данные</em> счетчиков</h2>
+                <form method="post" action="/personal/meters/">
+                    <input type="hidden" name="action" value="set_meters" />
+                    <input type="hidden" name="sessid" id="sessid" value="7580e735861c4511bebbf41d452009d5" />
+                    <table>
+                        <thead>
+                        <tr>
+                            <th style="width: 30%;">Счётчик</th>
+                            <th>Тариф 1 (ДЕНЬ)<br /><small style="font-weight: normal;">Предыдущее / текущее значение</small></th>
+                            <th>Тариф 2 (НОЧЬ)<br /><small style="font-weight: normal;">Предыдущее / текущее значение</small></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Счетчик водопотребления:
+                            </td>
+                            <td class="cost">455 / <input type="text" name="indiccur1[21770]" value="455" style="width: 50px;" />                    </td>
+                            <td class="cost">
+                                <span style="visibility:hidden;">0 / <input type="text" name="indiccur2[21770]" value="0" style="width: 50px;" /></span>                    </td>
+                        </tr>
+                        <tr>
+                            <td>Счетчик газоснабжения:
+                            </td>
+                            <td class="cost">5992 / <input type="text" name="indiccur1[21771]" value="5992" style="width: 50px;" />                    </td>
+                            <td class="cost">
+                                <span style="visibility:hidden;">0 / <input type="text" name="indiccur2[21771]" value="0" style="width: 50px;" /></span>                    </td>
+                        </tr>
+                        <tr>
+                            <td>Счетчик электроэнергии:
+                            </td>
+                            <td class="cost">5131 / <input type="text" name="indiccur1[21772]" value="5131" style="width: 50px;" />                    </td>
+                            <td class="cost">
+                                2004 / <input type="text" name="indiccur2[21772]" value="2004" style="width: 50px;" />                    </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align: right;">
+                                <input type="submit" name="submit_btn" value="Сохранить" />
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                </form>
+
+                <br><h3><em>Пожалуйста, обратите внимание на следующее:</em></h3><br/><p>1. Интернет-cервис по вводу показаний приборов учета воды, электричества и газа является <b>дополнительным</b> инструментом, предоставляемым жителям района для их удобства. В случае, если Вы ввели показания приборов учета через Интернет-сервис, представлять в управляющую компанию извещение на бумажном носителе (по <a href="/reu/docs/docs/Blank_priborov_ucheta.pdf" target="_blank">форме</a> «Извещение собственника ИЖД о показаниях индивидуальных приборов учета», см. раздел «<a href="/reu/docs/">Полезные документы</a>») не требуется.</p>
+                <p>2. В случае если Вы вносите показания приборов учета на бумажном носителе и одновременно по Интернет-сервису, приоритетным источником сведений является извещение на бумажном носителе.</p>
+                <p>3. Ввод показаний приборов учета через Интернет-сервис можно осуществлять в период с 00 часов 1-го числа по 00 часов 21 числа текущего месяца. Если Вы в этот период вводили показания несколько раз (что не запрещается), воспринят будет ввод, последний по времени.</p>
+                <p>4. С 21 числа до окончания каждого месяца ввод показаний приборов учета через Интернет-сервис заблокирован. В этот период бухгалтерской службой осуществляется расчет платежей и подготовка необходимых документов.</p>
+                <p>5. Если в Вашей квартире установлено два прибора учета горячего и/или холодного водоснабжения, в случае их поломки либо окончания срока поверки, начисления за потребленные коммунальные услуги по горячему либо холодному водоснабжению будут производиться по средним значениям/нормативу потребления указанных коммунальных услуг даже в случае, если вышел из строя только один из счетчиков соответствующего вида ресурса (п. 59 Постановления Правительства РФ от 06.05.2011 N 354 "О предоставлении коммунальных услуг собственникам и пользователям помещений в многоквартирных домах и жилых домов").</p>
+            </div></div>
+            <div class="cleaner">&nbsp;</div>
+
+            <div id="footer"><div class="page-width"><div class="i">
+                <p class="copyright">
+
+                    <div>
+                        <div>
+                            <a href="http://www.baltrosgroup.ru" target="_blank" >
+                                <img align="left" alt="Группа компаний Балтрос" src="/bitrix/templates/tszh/images/baltros_mini.gif" complete="complete" />
+                            </a>
+                        </div>
+                        <div>
+                            <br />
+                            <br />
+                <p style="text-indent: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&copy; Copyright 2010</p>
+                <p style="text-indent: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;Разработка: <a href="http://www.baltrosgroup.ru/" target="_blank" >ГК &laquo;Балтрос&raquo;</a></p>
+                <p style="text-indent: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;При использовании материалов сайта ссылка на сайт обязательна</p>
+            </div>
+            </div>
+
+                <div style="float:right; position:relative; top:-32px; left:-25px">
+                    <!-- HotLog -->
+                    <span id="hotlog_counter"></span>
+                    <span id="hotlog_dyn"></span>
+                    <script type="text/javascript">
+                        var hot_s = document.createElement('script');
+                        hot_s.type = 'text/javascript'; hot_s.async = true;
+                        hot_s.src = 'https://js.hotlog.ru/dcounter/2553064.js';
+                        hot_d = document.getElementById('hotlog_dyn');
+                        hot_d.appendChild(hot_s);
+                    </script>
+                    <noscript>
+                        <a href="https://click.hotlog.ru/?2553064" target="_blank"><img
+                                src="https://hit20.hotlog.ru/cgi-bin/hotlog/count?s=2553064&amp;im=307" border="0"
+                                alt="HotLog"></a>
+                    </noscript>
+                    <!-- /HotLog -->
+                </div>	<div class="links">
+
+                </div>
+            </div></div></div>
+    </div>
+</div>
+<div>&nbsp;</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-10874237-1");
+        pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
