@@ -6,10 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
     <meta name="keywords" content="Управляющая компания Новая Ижора" />
     <meta name="description" content="Сайт для УК" />
+    <link href="/bitrix/components/bitrix/system.show_message/templates/.default/style.css?1275291599" type="text/css" rel="stylesheet" />
     <link href="/bitrix/templates/tszh/styles.css?1277988274" type="text/css" rel="stylesheet" />
     <link href="/bitrix/templates/tszh/template_styles.css?1291796617" type="text/css" rel="stylesheet" />
 
-    <title>Данные счетчиков &ndash; Управляющая компания ООО "Новая Ижора"</title>
+    <title>Авторизация &ndash; Управляющая компания ООО "Новая Ижора"</title>
     <!--[if lte IE 7]>
     <link rel="stylesheet" href="/bitrix/templates/tszh/styles_ie.css" type="text/css" />
     <![endif]-->
@@ -25,14 +26,14 @@
             CheckScore();
         }
         function CheckEmailChange() {
-            onetimeAlertActive = true; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            onetimeAlertActive = false; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
             emailMustBeChanged = false; // Значение переменной задаётся при генерации страницы на сервере.
             if (onetimeAlertActive && emailMustBeChanged) {
                 alert ("Напоминаем, что Вам необходимо сменить e-mail адрес в вашем профиле!\nПосле смены адреса e-mail необходимо произвести повторную авторизацию!");
             }
         }
         function CheckScore() {
-            onetimeAlertActive = true; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            onetimeAlertActive = false; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
             dolgExist = false; // Значение переменной задаётся при генерации страницы на сервере.
             if (onetimeAlertActive && dolgExist) {
                 var url="/dolg.html?rub=0&kop=0"; // Значения переменных задаются при генерации страницы на сервере.
@@ -48,7 +49,10 @@
     <div class="page-inner">
         <div id="header"><div class="page-width">
             <h1 id="page-title"><a href="/"> <em>Управляющая компания ООО "Новая Ижора"</em></a></h1>	<div id="logged-as">
-            Вы авторизованы: <em>Гаврилова Клавдия Николаевна [arbuzo5428193]</em> <a href="/auth/?logout=yes">Выйти</a>
+            <a href="/auth/">Авторизация</a>
+            &nbsp;
+            <!--a href="/auth/?register=yes">Регистрация</a -->
+            <a href="/aboutregistration/">Как зарегистроваться</a -->
         </div>
             <form id="search-form" action="/search/" method="get"><label for="search-form-q" onclick="this.nextSibling.focus()" id="lbl">Поиск по сайту</label><input type="text" name="q" value="" id="search-form-q" onfocus="clean(this)"/>
                 <button type="submit">&raquo;</button>
@@ -149,51 +153,37 @@
 
 
             <div id="middle"><div class="column-in">
+                <h2>Авторизация</h2>
 
-                <h2><em>Данные</em> счетчиков</h2>
-                <form method="post" action="/personal/meters/">
-                    <input type="hidden" name="action" value="set_meters" />
-                    <input type="hidden" name="sessid" id="sessid" value="41750a6ea36be72ea7b75832c502967f" /><div style="font-size: 18px; color: red; line-height: 20px; padding: 20px 0 20px 0;">!!! Ввод показаний счётчиков заблокирован в связи с тем,<br />что предыдущие обработанные показания счётчиков ещё не были загружены из учётной системы.<br />Загрузка ожидается в ближайшее время...</div><br />
-                    <table>
-                        <thead>
-                        <tr>
-                            <th style="width: 30%;">Счётчик</th>
-                            <th>Тариф 1 (ДЕНЬ)<br /><small style="font-weight: normal;">Предыдущее / текущее значение</small></th>
-                            <th>Тариф 2 (НОЧЬ)<br /><small style="font-weight: normal;">Предыдущее / текущее значение</small></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Счетчик водопотребления:
-                            </td>
-                            <td class="cost">428 / 455                    </td>
-                            <td class="cost">
-                                <span style="visibility:hidden;">0 / 0</span>                    </td>
-                        </tr>
-                        <tr>
-                            <td>Счетчик газоснабжения:
-                            </td>
-                            <td class="cost">5637 / 5992                    </td>
-                            <td class="cost">
-                                <span style="visibility:hidden;">0 / 0</span>                    </td>
-                        </tr>
-                        <tr>
-                            <td>Счетчик электроэнергии:
-                            </td>
-                            <td class="cost">4795 / 5131                    </td>
-                            <td class="cost">
-                                1881 / 2004                    </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <p><font class="errortext">Неверный логин или пароль.<br /></font></p><form method="post" action="/personal/meters/?login=yes" id="auth-form">
+                <input type="hidden" name="AUTH_FORM" value="Y" />
+                <input type="hidden" name="TYPE" value="AUTH" />
+                <input type="hidden" name="backurl" value="/personal/meters/" />	<fieldset>
+                <label for="auth-login">Логин:</label>
+                <input type="text" name="USER_LOGIN" class="login input" id="auth-login" value="" />
+            </fieldset>
+                <fieldset>
+                    <label for="auth-password">Пароль:</label>
+                    <input type="password" name="USER_PASSWORD" class="password input" id="auth-password" value="" />
+                </fieldset>
+                <p><input type="checkbox" name="USER_REMEMBER" class="remember checkbox" id="auth-remember" value="Y"/> <label for="auth-remember" class="remember">Запомнить меня</label></p>
 
+                <button type="submit" title="Войти">Войти</button>
 
-                    <br><h3><em>Пожалуйста, обратите внимание на следующее:</em></h3><br/><p>1. Интернет-cервис по вводу показаний приборов учета воды, электричества и газа является <b>дополнительным</b> инструментом, предоставляемым жителям района для их удобства. В случае, если Вы ввели показания приборов учета через Интернет-сервис, представлять в управляющую компанию извещение на бумажном носителе (по <a href="/reu/docs/docs/Blank_priborov_ucheta.pdf" target="_blank">форме</a> «Извещение собственника ИЖД о показаниях индивидуальных приборов учета», см. раздел «<a href="/reu/docs/">Полезные документы</a>») не требуется.</p>
-                    <p>2. В случае если Вы вносите показания приборов учета на бумажном носителе и одновременно по Интернет-сервису, приоритетным источником сведений является извещение на бумажном носителе.</p>
-                    <p>3. Ввод показаний приборов учета через Интернет-сервис можно осуществлять в период с 00 часов 1-го числа по 00 часов 21 числа текущего месяца. Если Вы в этот период вводили показания несколько раз (что не запрещается), воспринят будет ввод, последний по времени.</p>
-                    <p>4. С 21 числа до окончания каждого месяца ввод показаний приборов учета через Интернет-сервис заблокирован. В этот период бухгалтерской службой осуществляется расчет платежей и подготовка необходимых документов.</p>
-                    <p>5. Если в Вашей квартире установлено два прибора учета горячего и/или холодного водоснабжения, в случае их поломки либо окончания срока поверки, начисления за потребленные коммунальные услуги по горячему либо холодному водоснабжению будут производиться по средним значениям/нормативу потребления указанных коммунальных услуг даже в случае, если вышел из строя только один из счетчиков соответствующего вида ресурса (п. 59 Постановления Правительства РФ от 06.05.2011 N 354 "О предоставлении коммунальных услуг собственникам и пользователям помещений в многоквартирных домах и жилых домов").</p>
-            </div></div>
+                <p class="links">
+
+                    <a href="/personal/meters/?forgot_password=yes">Восстановление пароля</a><br />
+                    (после получения контрольной строки следуйте на <a href="/personal/meters/?change_password=yes">форму для смены пароля</a>)
+
+                </p>
+            </form>
+                <script type="text/javascript">
+                    var fldLogin = document.getElementById('auth-login');
+                    if (fldLogin) {
+                        fldLogin.focus();
+                        fldLogin.select();
+                    }
+                </script>	</div></div>
             <div class="cleaner">&nbsp;</div>
 
             <div id="footer"><div class="page-width"><div class="i">

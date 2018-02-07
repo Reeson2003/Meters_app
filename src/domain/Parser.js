@@ -36,6 +36,7 @@ export default class Parser {
             throw Errors.LOGIN_ERROR;
         try {
             this.parseUsername(document);
+            this.parseSessionId(document);
             this.parseMeters(document);
         } catch (e) {
             throw Errors.PARSE_ERROR;
