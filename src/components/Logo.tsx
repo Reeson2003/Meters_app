@@ -10,27 +10,45 @@ import {
     ImageStyle,
     TextStyle
 } from 'react-native'
+import {connect} from 'react-redux'
 import {FlashState} from '../store/stateTypes'
 import {DispatchProps} from '../actions/flashActions'
+import {mapStateToProps} from '../actions/flashActions'
+import {mapDispatchToProps} from '../actions/flashActions'
+import Flash from '../domain/Flash'
 
+/* tslint:disable-next-line:no-var-requires */
 const flashOffImg = require('../images/measureOff.png')
+/* tslint:disable-next-line:no-var-requires */
 const flashOnImg = require('../images/measureOn.png')
-
 
 export type OwnProps = {
     title: string
 }
 
-export default class Logo extends Component<FlashState & DispatchProps & OwnProps> {
+class Logo extends Component<FlashState & DispatchProps & OwnProps> {
     toggleFlash = () => {
-
+        Flash.toggle(!this.props.isOn)
+            .then((isOn: boolean) => {
+                if (isOn) {
+                    this.props.onToggle()
+                } else
+                    this.props.onError('Unknown error')
+                this.props.onStopLoading()
+            })
+            .catch((error) => {
+                this.props.onError(error)
+                this.props.onStopLoading()
+            })
+        this.props.onStartLoading()
     }
+
     render() {
         return (
             <View style={styles.logoContainer}>
                 <TouchableOpacity
                     style={styles.imageWrapper}
-                    onPress={}
+                    onPress={this.toggleFlash}
                 >
                     <Image
                         style={{
@@ -44,8 +62,8 @@ export default class Logo extends Component<FlashState & DispatchProps & OwnProp
                 <Text style={styles.title}>{this.props.title}</Text>
             </View>
         )
-    };
-};
+    }
+}
 
 type Styles = {
     logoContainer: StyleProp<ViewStyle>,
@@ -75,3 +93,5 @@ const styles: Styles = StyleSheet.create({
         opacity: 0.5
     }
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logo)

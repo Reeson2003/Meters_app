@@ -1,31 +1,15 @@
 import React, {Component} from 'react'
 import {
-    StyleSheet,
-    View,
-    Text
+    View
 } from 'react-native'
+import Logo from './Logo'
 
-export interface Props {
-    text: string
-}
-
-export default class App extends Component<Props, null> {
+export default class App extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>hello world</Text>
+            <View>
+                <Logo/>
             </View>
-        );
+        )
     }
 }
-
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor: 'green'
-    },
-    text: {
-        textAlign: 'center',
-        fontSize: 25,
-        color: 'black',
-    }
-});
