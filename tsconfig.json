@@ -33,5 +33,5 @@
     "build",
     "node_modules"
   ],
-  "compileOnSave": false,
+  "compileOnSave": false
 }
