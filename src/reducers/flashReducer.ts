@@ -7,11 +7,13 @@ const initialStore: FlashState = {
     error: undefined
 }
 
-export const flashReducer = (state = initialStore, action: Actions): FlashState => {
+const flashReducer = (state = initialStore, action: Actions): FlashState => {
+    console.warn(action.type)
+    console.warn(state.isOn)
     switch (action.type) {
         case 'TOGGLE' : {
             return {
-                isOn: state.isOn,
+                isOn: !state.isOn,
                 ...state
             }
         }
@@ -38,3 +40,5 @@ export const flashReducer = (state = initialStore, action: Actions): FlashState 
         }
     }
 }
+
+export default flashReducer

@@ -1,3 +1,4 @@
+///<reference path="../../node_modules/@types/react-native/index.d.ts"/>
 import React, {Component} from 'react'
 import {
     StyleSheet,
@@ -28,12 +29,11 @@ export type OwnProps = {
 
 class Logo extends Component<FlashState & DispatchProps & OwnProps> {
     toggleFlash = () => {
+        console.warn('in toggle')
+        console.warn(this.props.isOn)
         Flash.toggle(!this.props.isOn)
-            .then((isOn: boolean) => {
-                if (isOn) {
-                    this.props.onToggle()
-                } else
-                    this.props.onError('Unknown error')
+            .then(() => {
+                this.props.onToggle()
                 this.props.onStopLoading()
             })
             .catch((error) => {
