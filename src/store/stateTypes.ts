@@ -1,3 +1,5 @@
+import {Meters, User} from '../domain/Types'
+
 export type FlashState = {
     isOn: boolean,
     loading: boolean,
@@ -5,25 +7,13 @@ export type FlashState = {
 }
 
 export type UserState = {
-    username: string,
-    password: string,
-    fullName: string,
+    user: User,
     loading: boolean,
     error: string
 }
 
-export type Meter = {
-    current: number,
-    previous: number
-}
-
 export type MetersState = {
-    water: Meter,
-    gas: Meter,
-    electricity: {
-        day: Meter,
-        night: Meter
-    },
+    meters: Meters,
     loading: boolean,
     error: string
 }

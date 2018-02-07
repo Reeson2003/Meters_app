@@ -1,25 +1,25 @@
 import {FlashState, State} from '../store/stateTypes'
 
-export type TogglehAction = {
-    type: 'TOGGLE',
-};
+export type ToggleAction = {
+    type: 'TOGGLE'
+}
 
 export type StartLoadingAction = {
     type: 'START_LOADING'
-};
+}
 
 export type StopLoadingAction = {
     type: 'STOP_LOADING'
-};
+}
 
 export type ErrorAction = {
     type: 'ERROR',
     error: string
-};
+}
 
-export type Actions = TogglehAction | StartLoadingAction | StopLoadingAction | ErrorAction;
+export type Actions = ToggleAction | StartLoadingAction | StopLoadingAction | ErrorAction
 
-type Dispatch = (action: Actions) => void;
+type Dispatch = (action: Actions) => void
 
 export interface DispatchProps {
     onToggle: () => void,
@@ -46,10 +46,10 @@ const stopLoading = (): Actions => {
     }
 }
 
-const error = (error: string): Actions => {
+const error = (err: string): Actions => {
     return {
         type: 'ERROR',
-        error: error
+        error: err
     }
 }
 

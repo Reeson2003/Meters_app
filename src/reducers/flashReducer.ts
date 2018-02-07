@@ -4,22 +4,22 @@ import { Actions } from '../actions/flashActions'
 const initialStore: FlashState = {
     isOn: false,
     loading: false,
-    error: null
+    error: undefined
 }
 
-export const flashReducer = (state = initialStore, action:Actions): FlashState => {
+export const flashReducer = (state = initialStore, action: Actions): FlashState => {
     switch (action.type) {
         case 'TOGGLE' : {
             return {
                 isOn: state.isOn,
                 ...state
-            };
+            }
         }
         case 'START_LOADING' : {
             return {
                 loading: true,
                 ...state
-            };
+            }
         }
         case 'STOP_LOADING' : {
             return {
@@ -31,11 +31,10 @@ export const flashReducer = (state = initialStore, action:Actions): FlashState =
             return {
                 error: action.error,
                 ...state
-            };
+            }
         }
         default : {
-            return state;
+            return state
         }
     }
 }
-
