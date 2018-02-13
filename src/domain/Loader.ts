@@ -10,7 +10,7 @@ const LOGOUT_URL = 'https://izora.info/auth/?logout=yes'
 
 export interface Loader {
     getMeters: () => Promise<Meters>
-    setMeters: (meters: Meters) => Promise<boolean>
+    setMeters: (water: number, gas: number, electricity: { day: number, night: number }) => Promise<boolean>
     logOut: () => Promise<void>
 }
 
@@ -39,12 +39,14 @@ class LoaderImpl implements Loader {
                 return parse(html).meters
             })
     }
-    public setMeters = (meters: Meters): Promise<boolean> => {
+    public setMeters = (water: number, gas: number, electricity: { day: number, night: number }): Promise<boolean> => {
         return new Promise<boolean>((resolve, reject) => {
             if (!this.data)
                 reject('Data is undefined')
+            else if (!this.data.meters.editable)
+                reject('Edition disabled')
             else {
-                const form = this.getMetersForm(meters, this.data.sessionId)
+                const form = this.getMetersForm(water, gas, electricity, this.data.sessionId)
                 fetch(METERS_URL, {
                     method: 'post',
                     headers: this.getHeaders(),
@@ -128,16 +130,16 @@ class LoaderImpl implements Loader {
         form.append('backurl', '/personal/meters/')
         return form
     }
-    private getMetersForm = (meters: Meters, sessionId: string): FormData => {
+    private getMetersForm = (water: number, gas: number, electricity: { day: number, night: number }, sessionId: string): FormData => {
         const form = new FormData()
         form.append('action', 'set_meters')
         form.append('sessid', sessionId)
-        form.append('indiccur1[21770]', meters.water.current)
+        form.append('indiccur1[21770]', water)
         form.append('indiccur2[21770]', 0)
-        form.append('indiccur1[21771]', meters.gas.current)
+        form.append('indiccur1[21771]', gas)
         form.append('indiccur2[21771]', 0)
-        form.append('indiccur1[21772]', meters.electricity.day.current)
-        form.append('indiccur2[21772]', meters.electricity.night.current)
+        form.append('indiccur1[21772]', electricity.day)
+        form.append('indiccur2[21772]', electricity.night)
         form.append('submit_btn', 'Сохранить')
         return form
     }

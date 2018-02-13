@@ -16,7 +16,15 @@ const run = () => {
             console.log(meters)
             _meters = meters
         })
-        .then(() => _loader.setMeters(incrementMeters(_meters)))
+        .then(() => {
+            const water = inc(_meters.water.previous)
+            const gas = inc(_meters.gas.previous)
+            const electricity = {
+                day: inc(_meters.electricity.day.previous),
+                night: inc(_meters.electricity.night.previous)
+            }
+            return _loader.setMeters(water, gas, electricity)
+        })
         .then(() => _loader.getMeters())
         .then(meters => {
             console.log(meters)
@@ -24,27 +32,8 @@ const run = () => {
         .catch(e => console.error(e))
 };
 
-const incrementMeters = (meters) => {
-    return {
-        water: {
-            previous: meters.water.previous,
-            current: 1 + parseInt(meters.water.current, 10)
-        },
-        gas: {
-            previous: meters.gas.previous,
-            current: meters.gas.current
-        },
-        electricity: {
-            day: {
-                previous: meters.electricity.day.previous,
-                current: meters.electricity.day.current
-            },
-            night: {
-                previous: meters.electricity.night.previous,
-                current: meters.electricity.night.current
-            }
-        }
-    }
+const inc = (value) => {
+    return 2 + parseInt(value)
 }
 
 run();
