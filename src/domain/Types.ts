@@ -4,6 +4,7 @@ export type Meter = {
 }
 
 export type Meters = {
+    editable: boolean,
     water: Meter,
     gas: Meter,
     electricity: {

@@ -1,11 +1,12 @@
-import Parser from '../domain/Parser';
+import parse from '../../artifacts/domain/Parser';
 
 const run = ()=>{
     const path = '../../meters_signed_in_3.html';
     const fs = require('fs');
     const file = fs.readFileSync(path, "utf8");
-    const parser = new Parser(file);
-    console.log(parser.toJson());
+
+    const res = parse(file)
+    console.log(res)
 };
 
 run();
