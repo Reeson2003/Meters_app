@@ -55,7 +55,7 @@ const error = (err: string): Actions => {
 
 export const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     return {
-        onToggle: () => dispatch(toggle()),
+        onToggle: () => {dispatch(toggle())},
         onStartLoading: () => dispatch(startLoading()),
         onStopLoading: () => dispatch(stopLoading()),
         onError: (err: string) => dispatch(error(err))
