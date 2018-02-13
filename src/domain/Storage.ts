@@ -12,7 +12,9 @@ export interface Storage {
     clear: () => Promise<void>
 }
 
-export default class StorageImpl implements Storage {
+export const getStorage = (): Storage => new StorageImpl()
+
+class StorageImpl implements Storage {
     save = (user: User): Promise<void> => {
         return AsyncStorage
             .setItem(keys.LOG, user.username)
@@ -22,18 +24,19 @@ export default class StorageImpl implements Storage {
     }
     load = (): Promise<User> => {
         return new Promise<User>((resolve, reject) => {
+            let login = undefined
             AsyncStorage
                 .getItem(keys.LOG)
                 .then((log) => {
-                    return AsyncStorage
-                        .getItem(keys.PASS)
-                        .then((pass) => {
-                            resolve({
-                                username: log,
-                                password: pass,
-                                fullName: undefined
-                            })
-                        })
+                    login = log
+                    return AsyncStorage.getItem(keys.PASS)
+                })
+                .then((pass) => {
+                    resolve({
+                        username: login,
+                        password: pass,
+                        fullName: undefined
+                    })
                 })
                 .catch((e) => {
                     reject(e)
@@ -47,5 +50,4 @@ export default class StorageImpl implements Storage {
                 return AsyncStorage.removeItem(keys.PASS)
             })
     }
-
 }
