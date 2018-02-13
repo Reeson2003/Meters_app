@@ -54,3 +54,4 @@ buck-out/
 
 /artifacts
 /dist
+/package-lock.json
