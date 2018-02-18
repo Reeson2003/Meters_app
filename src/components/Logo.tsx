@@ -16,12 +16,14 @@ import {FlashState} from '../store/stateTypes'
 import {DispatchProps} from '../actions/flashActions'
 import {mapStateToProps} from '../actions/flashActions'
 import {mapDispatchToProps} from '../actions/flashActions'
-import Flash from '../domain/Flash'
+import toggleFlash from '../domain/Flash'
 
 /* tslint:disable-next-line:no-var-requires */
 const flashOffImg = require('../images/measureOff.png')
 /* tslint:disable-next-line:no-var-requires */
 const flashOnImg = require('../images/measureOn.png')
+/* tslint:disable-next-line:no-var-requires */
+const flashErrImg = require('../images/measureErr.png')
 
 export type OwnProps = {
     title: string
@@ -29,21 +31,31 @@ export type OwnProps = {
 
 class Logo extends Component<FlashState & DispatchProps & OwnProps> {
     toggleFlash = () => {
-        console.warn('in toggle')
-        console.warn(this.props.isOn)
-        Flash.toggle(!this.props.isOn)
-            .then(() => {
-                this.props.onToggle()
-                this.props.onStopLoading()
-            })
-            .catch((error) => {
-                this.props.onError(error)
-                this.props.onStopLoading()
-            })
-        this.props.onStartLoading()
+        if (!this.props.error) {
+            toggleFlash(!this.props.isOn)
+                .then(() => {
+                    this.props.onToggle()
+                    this.props.onStopLoading()
+                })
+                .catch((error) => {
+                    this.props.onError(error)
+                    this.props.onStopLoading()
+                })
+            this.props.onStartLoading()
+        }
     }
 
     render() {
+        let img = flashOffImg
+        let opc = 0.1
+        if (this.props.isOn) {
+            img = flashOnImg
+            opc = 0.7
+        }
+        if (this.props.error) {
+            img = flashErrImg
+            opc = 0.7
+        }
         return (
             <View style={styles.logoContainer}>
                 <TouchableOpacity
@@ -54,9 +66,9 @@ class Logo extends Component<FlashState & DispatchProps & OwnProps> {
                         style={{
                             width: 100,
                             height: 100,
-                            opacity: this.props.isOn ? 0.6 : 0.1
+                            opacity: opc
                         }}
-                        source={this.props.isOn ? flashOnImg : flashOffImg}
+                        source={img}
                     />
                 </TouchableOpacity>
                 <Text style={styles.title}>{this.props.title}</Text>

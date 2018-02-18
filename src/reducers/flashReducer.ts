@@ -1,5 +1,5 @@
-import { FlashState } from '../store/stateTypes'
-import { Actions } from '../actions/flashActions'
+import {FlashState} from '../store/stateTypes'
+import {Actions} from '../actions/flashActions'
 
 const initialStore: FlashState = {
     isOn: false,
@@ -8,31 +8,29 @@ const initialStore: FlashState = {
 }
 
 const flashReducer = (state = initialStore, action: Actions): FlashState => {
-    console.warn(action.type)
-    console.warn(state.isOn)
     switch (action.type) {
         case 'TOGGLE' : {
             return {
-                isOn: !state.isOn,
-                ...state
+                ...state,
+                isOn: !state.isOn
             }
         }
         case 'START_LOADING' : {
             return {
-                loading: true,
-                ...state
+                ...state,
+                loading: true
             }
         }
         case 'STOP_LOADING' : {
             return {
-                loading: false,
-                ...state
+                ...state,
+                loading: false
             }
         }
         case 'ERROR' : {
             return {
-                error: action.error,
-                ...state
+                ...state,
+                error: action.error
             }
         }
         default : {

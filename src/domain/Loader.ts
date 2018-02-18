@@ -1,6 +1,6 @@
 //// uncomment to test on node.js
-import FormData from 'form-data'
-import fetch, {Response} from 'node-fetch'
+// import FormData from 'form-data'
+// import fetch, {Response} from 'node-fetch'
 import {Meters} from './Types'
 import parse, {ParsedData} from './Parser'
 
@@ -17,6 +17,8 @@ export interface Loader {
 export const getLoader = (username: string, password: string): Promise<Loader> => {
     return new LoaderImpl().getInstance(username, password)
 }
+
+export default getLoader
 
 class LoaderImpl implements Loader {
     private cookies: Map<string, string> = new Map<string, string>()
@@ -134,12 +136,12 @@ class LoaderImpl implements Loader {
         const form = new FormData()
         form.append('action', 'set_meters')
         form.append('sessid', sessionId)
-        form.append('indiccur1[21770]', water)
-        form.append('indiccur2[21770]', 0)
-        form.append('indiccur1[21771]', gas)
-        form.append('indiccur2[21771]', 0)
-        form.append('indiccur1[21772]', electricity.day)
-        form.append('indiccur2[21772]', electricity.night)
+        form.append('indiccur1[21770]', water.toString())
+        form.append('indiccur2[21770]', '0')
+        form.append('indiccur1[21771]', gas.toString())
+        form.append('indiccur2[21771]', '0')
+        form.append('indiccur1[21772]', electricity.day.toString())
+        form.append('indiccur2[21772]', electricity.night.toString())
         form.append('submit_btn', 'Сохранить')
         return form
     }
