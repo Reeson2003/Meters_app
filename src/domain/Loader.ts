@@ -34,12 +34,8 @@ class LoaderImpl implements Loader {
         return fetch(METERS_URL, {
             headers: this.getHeaders()
         })
-            .then((response: Response) => {
-                return response.text()
-            })
-            .then(html => {
-                return parse(html).meters
-            })
+            .then(response => response.text())
+            .then(html => parse(html).meters)
     }
     public setMeters = (water: number, gas: number, electricity: { day: number, night: number }): Promise<boolean> => {
         return new Promise<boolean>((resolve, reject) => {
@@ -91,9 +87,7 @@ class LoaderImpl implements Loader {
             .then((response: Response) => {
                 this.saveCookies(this.getCookieString(response))
             })
-            .then(() => {
-                return this.logIn(username, password)
-            })
+            .then(() => this.logIn(username, password))
     }
     private saveCookies = (cookies: string): void => {
         this.parseCookies(cookies)
@@ -104,9 +98,7 @@ class LoaderImpl implements Loader {
         this.cookies.forEach((value, key) => result += (key + '=' + value + ' '))
         return result
     }
-    private getCookieString = (response: Response): string => {
-        return response.headers.get('set-cookie')
-    }
+    private getCookieString = (response: Response): string =>  response.headers.get('set-cookie')
     private getHeaders = () => {
         return {
             cookie: this.getCookies()
@@ -115,12 +107,8 @@ class LoaderImpl implements Loader {
     private parseCookies = (cookies: string): string[][] => {
         let arr = cookies.split(' ')
         return arr
-            .filter((el) => {
-                return el.lastIndexOf('=') >= 0
-            })
-            .filter((el) => {
-                return !el.includes('path') && !el.includes('expires')
-            })
+            .filter(el => el.lastIndexOf('=') >= 0)
+            .filter(el => !el.includes('path') && !el.includes('expires'))
             .map(elem => elem.split('='))
     }
     private getLoginForm = (username: string, password: string): FormData => {
