@@ -8,7 +8,12 @@ import {connect} from 'react-redux'
 
 class LogoContainer extends Component<FlashState & FlashDispatchProps & { title: string }> {
     render() {
-        return <Logo title={this.props.title} onClick={this.toggleFlash} flashIsOn={this.props.isOn} error={this.props.isError}/>
+        return <Logo
+            title={this.props.title}
+            onClick={this.toggleFlash}
+            flashIsOn={this.props.isOn}
+            error={this.props.error === undefined}
+        />
     }
 
     toggleFlash = () => {
