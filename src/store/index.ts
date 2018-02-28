@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 import {createStore} from 'redux'
-import Flash from './flashReducer'
+import Flash from '../reducers/flashReducer'
 
 const store = combineReducers({
     flash: Flash

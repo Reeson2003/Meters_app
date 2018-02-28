@@ -21,8 +21,6 @@ const run = async () => {
     }
 };
 
-const inc = (value) => {
-    return 2 + parseInt(value)
-}
+const inc = value => 2 + parseInt(value)
 
 run();

@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
-// import {
-//     View
-// } from 'react-native'
 import {Provider} from 'react-redux'
-import Logo from './Logo'
-import Store from '../reducers'
+import Logo from '../containers/LogoContainer'
+import Store from '../store/index'
 
 export default class App extends Component {
     render() {

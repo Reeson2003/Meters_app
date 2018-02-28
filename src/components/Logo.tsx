@@ -11,12 +11,6 @@ import {
     ImageStyle,
     TextStyle
 } from 'react-native'
-import {connect} from 'react-redux'
-import {FlashState} from '../store/stateTypes'
-import {DispatchProps} from '../actions/flashActions'
-import {mapStateToProps} from '../actions/flashActions'
-import {mapDispatchToProps} from '../actions/flashActions'
-import toggleFlash from '../domain/Flash'
 
 /* tslint:disable-next-line:no-var-requires */
 const flashOffImg = require('../images/measureOff.png')
@@ -25,30 +19,18 @@ const flashOnImg = require('../images/measureOn.png')
 /* tslint:disable-next-line:no-var-requires */
 const flashErrImg = require('../images/measureErr.png')
 
-export type OwnProps = {
-    title: string
+export type LogoProps = {
+    title: string,
+    onClick: () => void,
+    flashIsOn: boolean,
+    error: boolean
 }
 
-class Logo extends Component<FlashState & DispatchProps & OwnProps> {
-    toggleFlash = () => {
-        if (!this.props.error) {
-            toggleFlash(!this.props.isOn)
-                .then(() => {
-                    this.props.onToggle()
-                    this.props.onStopLoading()
-                })
-                .catch((error) => {
-                    this.props.onError(error)
-                    this.props.onStopLoading()
-                })
-            this.props.onStartLoading()
-        }
-    }
-
+export default class Logo extends Component<LogoProps> {
     render() {
         let img = flashOffImg
         let opc = 0.1
-        if (this.props.isOn) {
+        if (this.props.flashIsOn) {
             img = flashOnImg
             opc = 0.7
         }
@@ -60,7 +42,7 @@ class Logo extends Component<FlashState & DispatchProps & OwnProps> {
             <View style={styles.logoContainer}>
                 <TouchableOpacity
                     style={styles.imageWrapper}
-                    onPress={this.toggleFlash}
+                    onPress={this.props.onClick}
                 >
                     <Image
                         style={{
@@ -105,5 +87,3 @@ const styles: Styles = StyleSheet.create({
         opacity: 0.5
     }
 })
-
-export default connect(mapStateToProps, mapDispatchToProps)(Logo)

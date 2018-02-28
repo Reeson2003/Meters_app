@@ -1,64 +1,52 @@
 import {FlashState, State} from '../store/stateTypes'
 
-export type ToggleAction = {
-    type: 'TOGGLE'
+export type ToggleSuccess = {
+    type: 'TOGGLE_SUCCESS'
 }
 
-export type StartLoadingAction = {
-    type: 'START_LOADING'
+export type ToggleRequestAction = {
+    type: 'TOGGLE_REQUEST'
 }
 
-export type StopLoadingAction = {
-    type: 'STOP_LOADING'
-}
-
-export type ErrorAction = {
-    type: 'ERROR',
+export type ToggleErrorAction = {
+    type: 'TOGGLE_ERROR',
     error: string
 }
 
-export type Actions = ToggleAction | StartLoadingAction | StopLoadingAction | ErrorAction
+export type Actions = ToggleSuccess | ToggleRequestAction | ToggleErrorAction
 
 type Dispatch = (action: Actions) => void
 
-export interface DispatchProps {
-    onToggle: () => void,
-    onStartLoading: () => void,
-    onStopLoading: () => void,
-    onError: (error: string) => void
+export type FlashDispatchProps = {
+    onToggleRequest: () => void,
+    onToggleSuccess: () => void,
+    onToggleError: (error: string) => void
 }
 
-const toggle = (): Actions => {
+const toggleSuccess = (): Actions => {
     return {
-        type: 'TOGGLE'
+        type: 'TOGGLE_SUCCESS'
     }
 }
 
-const startLoading = (): Actions => {
+const toggleRequest = (): Actions => {
     return {
-        type: 'START_LOADING'
+        type: 'TOGGLE_REQUEST'
     }
 }
 
-const stopLoading = (): Actions => {
+const toggleError = (err: string): Actions => {
     return {
-        type: 'STOP_LOADING'
-    }
-}
-
-const error = (err: string): Actions => {
-    return {
-        type: 'ERROR',
+        type: 'TOGGLE_ERROR',
         error: err
     }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
+export const mapDispatchToProps = (dispatch: Dispatch): FlashDispatchProps => {
     return {
-        onToggle: () => {dispatch(toggle())},
-        onStartLoading: () => {dispatch(startLoading())},
-        onStopLoading: () => {dispatch(stopLoading())},
-        onError: (err: string) => {dispatch(error(err))}
+        onToggleRequest: () => {dispatch(toggleRequest())},
+        onToggleSuccess: () => {dispatch(toggleSuccess())},
+        onToggleError: error => {dispatch(toggleError(error))}
     }
 }
 

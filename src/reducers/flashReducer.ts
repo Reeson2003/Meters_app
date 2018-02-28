@@ -9,27 +9,24 @@ const initialStore: FlashState = {
 
 const flashReducer = (state = initialStore, action: Actions): FlashState => {
     switch (action.type) {
-        case 'TOGGLE' : {
+        case 'TOGGLE_SUCCESS' : {
             return {
                 ...state,
-                isOn: !state.isOn
+                loading: false,
+                isOn: !state.isOn,
+                error: undefined
             }
         }
-        case 'START_LOADING' : {
+        case 'TOGGLE_REQUEST' : {
             return {
                 ...state,
                 loading: true
             }
         }
-        case 'STOP_LOADING' : {
+        case 'TOGGLE_ERROR' : {
             return {
                 ...state,
-                loading: false
-            }
-        }
-        case 'ERROR' : {
-            return {
-                ...state,
+                loading: false,
                 error: action.error
             }
         }
