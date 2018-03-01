@@ -3,16 +3,7 @@
 // import fetch, {Response} from 'node-fetch'
 import {Meters} from './Types'
 import parse, {ParsedData} from './Parser'
-
-const METERS_URL = 'https://izora.info/personal/meters/'
-const METERS_POST_URL = METERS_URL + '?login=yes'
-const LOGOUT_URL = 'https://izora.info/auth/?logout=yes'
-
-export interface Loader {
-    getMeters: () => Promise<Meters>
-    setMeters: (water: number, gas: number, electricity: { day: number, night: number }) => Promise<boolean>
-    logOut: () => Promise<void>
-}
+import {Loader, LOGOUT_URL, METERS_POST_URL, METERS_URL} from './LoaderInterface'
 
 export const getLoader = (username: string, password: string): Promise<Loader> => {
     return new LoaderImpl().getInstance(username, password)
