@@ -25,6 +25,7 @@ class HeadlessLoader implements Loader {
         return this.meters
     }
     setMeters = (water: number, gas: number, electricity: { day: number; night: number }): Promise<boolean> => {
+        console.log(water, gas, electricity)
         return undefined
     }
     logOut = (): Promise<void> => {

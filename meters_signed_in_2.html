@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\WebStorm 2017.2.5 Educate\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" -r babel-register C:\my_workspace\frontend\Meters_app\src\test\LoaderTest.js
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-RU">
@@ -25,14 +25,14 @@
             CheckScore();
         }
         function CheckEmailChange() {
-            onetimeAlertActive = true; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            onetimeAlertActive = false; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
             emailMustBeChanged = false; // Значение переменной задаётся при генерации страницы на сервере.
             if (onetimeAlertActive && emailMustBeChanged) {
                 alert ("Напоминаем, что Вам необходимо сменить e-mail адрес в вашем профиле!\nПосле смены адреса e-mail необходимо произвести повторную авторизацию!");
             }
         }
         function CheckScore() {
-            onetimeAlertActive = true; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
+            onetimeAlertActive = false; // Признак того, что нужно вывести разовое предупреждение. Значение переменной задаётся при генерации страницы на сервере.
             dolgExist = false; // Значение переменной задаётся при генерации страницы на сервере.
             if (onetimeAlertActive && dolgExist) {
                 var url="/dolg.html?rub=0&kop=0"; // Значения переменных задаются при генерации страницы на сервере.
@@ -153,7 +153,7 @@
                 <h2><em>Данные</em> счетчиков</h2>
                 <form method="post" action="/personal/meters/">
                     <input type="hidden" name="action" value="set_meters" />
-                    <input type="hidden" name="sessid" id="sessid" value="41750a6ea36be72ea7b75832c502967f" /><div style="font-size: 18px; color: red; line-height: 20px; padding: 20px 0 20px 0;">!!! Ввод показаний счётчиков заблокирован в связи с тем,<br />что предыдущие обработанные показания счётчиков ещё не были загружены из учётной системы.<br />Загрузка ожидается в ближайшее время...</div><br />
+                    <input type="hidden" name="sessid" id="sessid" value="8861e41c7d0f8c488b34c9f57dc15b87" /><div style="font-size: 18px; color: red; line-height: 20px; padding: 20px 0 20px 0;">!!! Ввод показаний счётчиков заблокирован в связи с тем,<br />что предыдущие обработанные показания счётчиков ещё не были загружены из учётной системы.<br />Загрузка ожидается в ближайшее время...</div><br />
                     <table>
                         <thead>
                         <tr>
@@ -166,23 +166,23 @@
                         <tr>
                             <td>Счетчик водопотребления:
                             </td>
-                            <td class="cost">428 / 455                    </td>
+                            <td class="cost">455 / 472                    </td>
                             <td class="cost">
                                 <span style="visibility:hidden;">0 / 0</span>                    </td>
                         </tr>
                         <tr>
                             <td>Счетчик газоснабжения:
                             </td>
-                            <td class="cost">5637 / 5992                    </td>
+                            <td class="cost">5992 / 6218                    </td>
                             <td class="cost">
                                 <span style="visibility:hidden;">0 / 0</span>                    </td>
                         </tr>
                         <tr>
                             <td>Счетчик электроэнергии:
                             </td>
-                            <td class="cost">4795 / 5131                    </td>
+                            <td class="cost">5131 / 5302                    </td>
                             <td class="cost">
-                                1881 / 2004                    </td>
+                                2004 / 2066                    </td>
                         </tr>
                         </tbody>
                     </table>
