@@ -52,15 +52,16 @@
   },
   "jest": {
     "preset": "react-native",
+    "testRegex": "(/src\\test/.*|(\\.|/)(test|spec))\\.jsx?$",
     "coverageDirectory": "coverage",
     "coverageReporters": [
       "text-summary",
       "html"
     ],
     "collectCoverageFrom": [
-      "artifacts/**/*.js",
-      "!artifacts/**/*.spec.js",
-      "!artifacts/**/*.index.js"
+      "stc/**/*.js",
+      "!src/**/*.spec.js",
+      "!src/**/*.index.js"
     ]
   }
 }
