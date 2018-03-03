@@ -52,7 +52,6 @@
   },
   "jest": {
     "preset": "react-native",
-    "testRegex": "artifacts/.+\\.(test|spec).js$",
     "coverageDirectory": "coverage",
     "coverageReporters": [
       "text-summary",

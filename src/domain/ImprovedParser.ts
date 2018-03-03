@@ -1,11 +1,6 @@
 import {DOMParser} from 'react-native-html-parser'
 import {Meter, Meters} from './Types'
 
-export const errors = {
-    LOGIN_ERROR: 'Incorrect username or password',
-    PARSE_ERROR: 'Can not parse data'
-}
-
 export interface ParsedData {
     userFullName: string
     sessionId: string
@@ -39,7 +34,14 @@ type ParsingResult = {
 }
 
 const parse = (html: string): ParsedData => {
-    const parser = new DOMParser({
+    const parser = getParser()
+    const document = parser.parseFromString(html, 'text/html')
+    const raw = parseRaw(document)
+    return convertRaw(raw)
+}
+
+const getParser = () => {
+    return new DOMParser({
         errorHandler: {
             /* tslint:disable-next-line */
             warning: () => {
@@ -52,10 +54,40 @@ const parse = (html: string): ParsedData => {
             }
         }
     })
-    const document = parser.parseFromString(html, 'text/html')
-    const raw = parseRaw(document)
-    console.log(raw)
-    return undefined
+}
+
+const convertRaw = (raw: ParsingResult): ParsedData => {
+    const isEditable: boolean = raw.waterInput !== undefined &&
+        raw.gasInput !== undefined &&
+        raw.electricityDayInput !== undefined &&
+        raw.electricityNightInput !== undefined
+    return {
+        userFullName: raw.loggedAs,
+        sessionId: raw.sessionId,
+        meters: {
+            editable: isEditable,
+            water: convertMeter(raw.water, raw.waterInput),
+            gas: convertMeter(raw.gas, raw.gasInput),
+            electricity: {
+                day: convertMeter(raw.electricityDay, raw.electricityDayInput),
+                night: convertMeter(raw.electricityNight, raw.electricityNightInput)
+            }
+        }
+    }
+}
+
+const convertMeter = (meterString: string, meterInputString: string): Meter => {
+    const metersBoth = meterString.split('/').map(m => m.trim())
+    if (!meterInputString)
+        return {
+            previous: Number.parseInt(metersBoth[0]),
+            current: Number.parseInt(metersBoth[1])
+        }
+    else
+        return {
+            previous: Number.parseInt(metersBoth[0]),
+            current: Number.parseInt(meterInputString)
+        }
 }
 
 const parseRaw = (doc): ParsingResult => {
@@ -102,7 +134,10 @@ const querySelector = (document, selector: string) => {
         try {
             return element.firstChild.data.trim()
         } catch (e) {
-            return element.attributes[2].value
+            const el = element.attributes[2].value
+            if (el === SESSION_ID_SELECTOR.replace('#', ''))
+                return element.attributes[3].value
+            return el
         }
     } catch (e) {
         return undefined
@@ -130,90 +165,3 @@ const parseChildQuery = (query: string): { tag: string, n: number } => {
 }
 
 export default parse
-
-const isNotLoggedIn = (document): boolean => {
-    return document.querySelect('.errortext')[0]
-}
-
-const parseUsername = (document): string => {
-    const header = document.getElementsByAttribute('id', 'logged-as')[0]
-    const em = header.querySelect('em')[0]
-    return em.firstChild.data.trim()
-}
-
-const parseSessionId = (document): string => {
-    return document.querySelect('input')[2].attributes[3].value
-}
-
-const parseMeters = (document): Meters => {
-    const table = document.querySelect('table')[1]
-    const body = table.querySelect('tbody')[0]
-    const row = body.querySelect('tr')
-    const water = parseWater(row[0])
-    const gas = parseGas(row[1])
-    const electricity = parseElectricity(row[2])
-    const editable = water.editable && gas.editable && electricity.day.editable && electricity.night.editable
-    return {
-        editable: editable,
-        water: water.meter,
-        gas: gas.meter,
-        electricity: {
-            day: electricity.day.meter,
-            night: electricity.night.meter
-        }
-    }
-}
-
-type EditableMeter = {
-    meter: Meter,
-    editable: boolean
-}
-
-const parseWater = (raw): EditableMeter => {
-    const td = raw.querySelect('td')[1]
-    return parseData(td)
-}
-
-const parseGas = (raw): EditableMeter => {
-    const td = raw.querySelect('td')[1]
-    return parseData(td)
-}
-
-const parseElectricity = (raw): { day: EditableMeter, night: EditableMeter } => {
-    parseEDay(raw)
-    parseENight(raw)
-    return {
-        day: parseEDay(raw),
-        night: parseENight(raw)
-    }
-}
-
-const parseEDay = (raw): EditableMeter => {
-    const td = raw.querySelect('td')[1]
-    return parseData(td)
-}
-
-const parseENight = (raw): EditableMeter => {
-    const td = raw.querySelect('td')[2]
-    return parseData(td)
-}
-
-const parseData = (raw): EditableMeter => {
-    let editable = false
-    const el = raw.firstChild
-    const text = el.data
-    const data = text.trim().split('/')
-    const prev = data[0]
-    let curr = data[1]
-    if (!curr) {
-        curr = raw.querySelect('input')[0].attributes[2].value
-        editable = true
-    }
-    return {
-        meter: {
-            previous: prev,
-            current: curr
-        },
-        editable: editable
-    }
-}
