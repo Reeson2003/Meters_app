@@ -57,26 +57,38 @@ const getParser = () => {
 }
 
 const convertRaw = (raw: ParsingResult): ParsedData => {
+    return {
+        userFullName: raw.loggedAs,
+        sessionId: raw.sessionId,
+        meters: convertMeters(raw)
+    }
+}
+
+const convertMeters = (raw: ParsingResult): Meters => {
+    if (raw.water === undefined || raw.gas === undefined || raw.electricityDay === undefined || raw.electricityNight === undefined)
+        return undefined
     const isEditable: boolean = raw.waterInput !== undefined &&
         raw.gasInput !== undefined &&
         raw.electricityDayInput !== undefined &&
         raw.electricityNightInput !== undefined
     return {
-        userFullName: raw.loggedAs,
-        sessionId: raw.sessionId,
-        meters: {
-            editable: isEditable,
-            water: convertMeter(raw.water, raw.waterInput),
-            gas: convertMeter(raw.gas, raw.gasInput),
-            electricity: {
+        editable: isEditable,
+        water:
+            convertMeter(raw.water, raw.waterInput),
+        gas:
+            convertMeter(raw.gas, raw.gasInput),
+        electricity:
+            {
                 day: convertMeter(raw.electricityDay, raw.electricityDayInput),
-                night: convertMeter(raw.electricityNight, raw.electricityNightInput)
+                night:
+                    convertMeter(raw.electricityNight, raw.electricityNightInput)
             }
-        }
     }
 }
 
 const convertMeter = (meterString: string, meterInputString: string): Meter => {
+    if (meterString === undefined)
+        return undefined
     const metersBoth = meterString.split('/').map(m => m.trim())
     if (!meterInputString)
         return {

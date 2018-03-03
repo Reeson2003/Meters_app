@@ -1,9 +1,9 @@
 import parse, {ParsedData} from '../domain/ImprovedParser'
 
-const SIGNED_OUT_HTML = '../../meters_signed_out.html'
-const EDIT_DISABLED_A_HTML = '../../meters_signed_in.html'
-const EDIT_DISABLED_B_HTML = '../../meters_signed_in_2.html'
-const EDIT_ENABLED = '../../meters_signed_in_3.html'
+const SIGNED_OUT_HTML = 'meters_signed_out.html'
+const EDIT_DISABLED_A_HTML = 'meters_signed_in.html'
+const EDIT_DISABLED_B_HTML = 'meters_signed_in_2.html'
+const EDIT_ENABLED = 'meters_signed_in_3.html'
 
 const signedOutResult: ParsedData = {
     userFullName: undefined,
@@ -45,17 +45,29 @@ const editEnabledResult = {
     }
 }
 
-// it('Successfully signed out parsed', () => {
-//     expect(parse(SIGNED_OUT_HTML)).toEqual(signedOutResult)
-// })
-
-const run = () => {
-    const path = EDIT_DISABLED_B_HTML
+const getFile = (path: string) => {
     const fs = require('fs')
-    const file = fs.readFileSync(path, 'utf8')
-
-    const res: ParsedData = parse(file)
-    console.log(editEnabledResult)
+    return fs.readFileSync(path, 'utf8')
 }
 
-run()
+it('Successfully signed out parsed', () => {
+    expect(parse(getFile(SIGNED_OUT_HTML))).toEqual(signedOutResult)
+})
+
+it('Successfully edit disabled (a) parsed', () => {
+    expect(parse(getFile(EDIT_DISABLED_A_HTML))).toEqual(editDisabledResult)
+})
+
+it('Successfully edit disabled (b) parsed', () => {
+    expect(parse(getFile(EDIT_DISABLED_B_HTML))).toEqual(editDisabledResult)
+})
+
+it('Successfully edit enabled parsed', () => {
+    expect(parse(getFile(EDIT_ENABLED))).toEqual(editEnabledResult)
+})
+
+// const run = () => {
+//     console.log(parse(getFile('../../meters_signed_in_3.html')))
+// }
+//
+// run()

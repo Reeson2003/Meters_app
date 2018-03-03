@@ -1,5 +1,5 @@
 /// <reference types="node"/>
-import getLoader from '../src/domain/Loader'
+import getLoader from '../domain/Loader'
 
 it('load test', () => {
     const username = 'arbuzo5428193'
