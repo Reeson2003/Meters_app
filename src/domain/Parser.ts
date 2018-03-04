@@ -26,10 +26,14 @@ const parse = (html: string): ParsedData => {
             }
         }
     })
+    try {
     const document = parser.parseFromString(html, 'text/html')
     if (isNotLoggedIn(document))
-        throw errors.LOGIN_ERROR
-    try {
+        return {
+            userFullName: undefined,
+            sessionId: undefined,
+            meters: undefined
+        }
         return {
             userFullName: parseUsername(document),
             sessionId: parseSessionId(document),

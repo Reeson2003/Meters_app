@@ -20,3 +20,13 @@ gradlew clean
 https://medium.com/@rintoj/react-native-with-typescript-40355a90a5d7
 
 Webstorm, uncheck "File->Settings->System Settings->sychronization->use safe write"
+
+
+project.ext.react = [
+  entryFile: "artifacts/index.android.js"
+]
+MainApplication.java
+@Override
+protected String getJSMainModuleName() {
+  return "src/index.android";
+}

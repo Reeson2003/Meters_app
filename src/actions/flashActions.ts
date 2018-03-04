@@ -1,6 +1,6 @@
 import {FlashState, State} from '../store/stateTypes'
 
-export type ToggleSuccess = {
+export type ToggleSuccessAction = {
     type: 'TOGGLE_SUCCESS'
 }
 
@@ -13,7 +13,7 @@ export type ToggleErrorAction = {
     error: string
 }
 
-export type Actions = ToggleSuccess | ToggleRequestAction | ToggleErrorAction
+export type Actions = ToggleSuccessAction | ToggleRequestAction | ToggleErrorAction
 
 type Dispatch = (action: Actions) => void
 
@@ -50,6 +50,4 @@ export const mapDispatchToProps = (dispatch: Dispatch): FlashDispatchProps => {
     }
 }
 
-export const mapStateToProps = (state: State): FlashState => {
-    return state.flash
-}
+export const mapStateToProps = (state: State): FlashState => state.flash

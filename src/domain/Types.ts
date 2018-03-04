@@ -13,8 +13,8 @@ export type Meters = {
     }
 }
 
-export type User = {
-    username: string,
-    password: string,
-    fullName: string
+export type SiteData = {
+    session: string,
+    userFullName: string,
+    meters: Meters
 }

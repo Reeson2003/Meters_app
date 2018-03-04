@@ -1,4 +1,4 @@
-import {Meters, User} from '../domain/Types'
+import {SiteData} from '../domain/Types'
 
 export type FlashState = {
     isOn: boolean,
@@ -6,20 +6,29 @@ export type FlashState = {
     error: string
 }
 
-export type UserState = {
-    user: User,
+export const initialFlashState: FlashState = {
+    isOn: false,
+    loading: false,
+    error: undefined
+}
+
+export type SiteState = {
+    site: SiteData,
     loading: boolean,
     error: string
 }
 
-export type MetersState = {
-    meters: Meters,
-    loading: boolean,
-    error: string
+export const initialSiteState: SiteState = {
+    site: {
+        session: undefined,
+        userFullName: undefined,
+        meters: undefined
+    },
+    loading: false,
+    error: undefined
 }
 
 export type State = {
     flash: FlashState,
-    user: UserState,
-    meters: MetersState
+    site: SiteState
 }
