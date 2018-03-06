@@ -1,5 +1,5 @@
 ///<reference path="../../node_modules/@types/react-native/index.d.ts"/>
-import React, {Component} from 'react'
+import React from 'react'
 import {
     StyleSheet,
     Text,
@@ -12,52 +12,33 @@ import {
     TextStyle
 } from 'react-native'
 
-/* tslint:disable-next-line:no-var-requires */
-const flashOffImg = require('../images/measureOff.png')
-/* tslint:disable-next-line:no-var-requires */
-const flashOnImg = require('../images/measureOn.png')
-/* tslint:disable-next-line:no-var-requires */
-const flashErrImg = require('../images/measureErr.png')
-
 export type LogoProps = {
     title: string,
     onClick: () => void,
-    flashIsOn: boolean,
-    error: boolean
+    imageUrl: string,
+    imgOpacity: number
 }
 
-export default class Logo extends Component<LogoProps> {
-    render() {
-        let img = flashOffImg
-        let opc = 0.1
-        if (this.props.flashIsOn) {
-            img = flashOnImg
-            opc = 0.7
-        }
-        if (this.props.error) {
-            img = flashErrImg
-            opc = 0.7
-        }
-        return (
-            <View style={styles.logoContainer}>
-                <TouchableOpacity
-                    style={styles.imageWrapper}
-                    onPress={this.props.onClick}
-                >
-                    <Image
-                        style={{
-                            width: 100,
-                            height: 100,
-                            opacity: opc
-                        }}
-                        source={img}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.title}>{this.props.title}</Text>
-            </View>
-        )
-    }
-}
+const logo = (props: LogoProps) => (
+    <View style={styles.logoContainer}>
+        <TouchableOpacity
+            style={styles.imageWrapper}
+            onPress={props.onClick}
+        >
+            <Image
+                style={{
+                    width: 100,
+                    height: 100,
+                    opacity:  props.imgOpacity
+                }}
+                source={require(props.imageUrl)}
+            />
+        </TouchableOpacity>
+        <Text style={styles.title}>{props.title}</Text>
+    </View>
+)
+
+export default logo
 
 type Styles = {
     logoContainer: StyleProp<ViewStyle>,

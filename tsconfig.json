@@ -14,7 +14,7 @@
     "sourceMap": true,
     "noImplicitReturns": true,
     "noUnusedParameters": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "skipLibCheck": true
   },
   "filesGlob": [
